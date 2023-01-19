@@ -1,16 +1,15 @@
 package app.deserted.cotopaxi.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,7 +17,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cupcake.R
@@ -53,48 +56,89 @@ fun SelectOptionScreen(
                 ),
                 verticalAlignment = Alignment.CenterVertically
             ){
-                RadioButton(
-                    selected = selectedValue == item,
-                    onClick = {
-                        selectedValue = item
-                        onSelectionChanged(item)
-                    }
-                )
-                Text(item)
+
+                AlignYourBodyRow()
             }
         }
-        Divider(thickness = 1.dp, modifier = modifier.padding(bottom = 16.dp))
-        FormattedPriceLabel(
-            subtotal = subtotal,
+
+
+    }
+}
+
+
+@Composable
+fun AlignYourBodyRow(
+    modifier: Modifier = Modifier
+) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
+    ) {
+        items(alignYourBodyData) { item ->
+            AlignYourBodyElement(item.drawable, item.text)
+        }
+    }
+}
+
+@Composable
+fun AlignYourBodyElement(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        Card(
             modifier = Modifier
-                .align(Alignment.End)
-                .padding(top = 16.dp, bottom = 16.dp)
-        )
-        Row (
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ){
-            OutlinedButton(modifier = Modifier.weight(1f),
-                onClick = onCancelButtonClicked) {
-                Text(stringResource(R.string.cancel))
-            }
-            Button(
-                modifier = Modifier.weight(1f),
-                // the button is enabled when the user makes a selection
-                enabled = selectedValue.isNotEmpty(),
-                onClick = onNextButtonClicked
+                .width(351.dp)
+                .height(390.dp)
+                .padding(8.dp)
+                .clickable {
+
+                },
+            elevation = 10.dp
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(stringResource(R.string.next))
+                Image(painter = painterResource(drawable),
+                    contentDescription =null,
+                    modifier = Modifier
+                        .size(333.dp)
+                        .clip(CircleShape)
+                )
+
             }
         }
     }
 }
 
-@Preview
-@Composable
-fun SelectOptionPreview(){
-    SelectOptionScreen(
-        subtotal = "299.99",
-        options = listOf("Option 1", "Option 2", "Option 3", "Option 4")
-    )
-}
+
+
+private  val alignYourBodyData = listOf(
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+).map { DrawableStringPair(it.first, it.second)}
+
+private data class DrawableStringPair(
+    @DrawableRes val drawable: Int,
+    @StringRes val text: Int
+)
+

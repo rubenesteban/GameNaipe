@@ -15,6 +15,9 @@
 -->
 <resources>
     <string name="app_name">Cotopaxi</string>
+    <string name="lesve">Please</string>
+    <string name="lesve1">Everthing</string>
+    <string name="lesveq">Cotopaxi</string>
     <string name="order_cupcakes">Orden de Cotopaxi</string>
     <string name="one_cupcake">Un Cotopaxi</string>
     <string name="six_cupcakes">Seis Cotopaxis</string>
