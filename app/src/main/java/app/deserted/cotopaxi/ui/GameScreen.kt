@@ -33,8 +33,9 @@ import app.deserted.cotopaxi.ui.components.FormattedPriceLabel
  * [onCancelButtonClicked] lambda that cancels the order when user clicks cancel and
  * [onNextButtonClicked] lambda that triggers the navigation to next screen
  */
+
 @Composable
-fun SelectOptionScreen(
+fun GameScreen(
     subtotal: String,
     options: List<String>,
     onSelectionChanged: (String) -> Unit = {},
@@ -56,8 +57,7 @@ fun SelectOptionScreen(
                 ),
                 verticalAlignment = Alignment.CenterVertically
             ){
-
-                AlignYourBodyRow()
+                AlignQouBodyRow()
             }
         }
 
@@ -67,21 +67,21 @@ fun SelectOptionScreen(
 
 
 @Composable
-fun AlignYourBodyRow(
+fun AlignQouBodyRow(
     modifier: Modifier = Modifier
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
     ) {
-        items(alignYourBodyData) { item ->
-            AlignYourBodyElement(item.drawable, item.text)
+        items(alignQouBodyData) { item ->
+            AlignQouBodyElement(item.drawable, item.text)
         }
     }
 }
 
 @Composable
-fun AlignYourBodyElement(
+fun AlignQouBodyElement(
     @DrawableRes drawable: Int,
     @StringRes text: Int,
     modifier: Modifier = Modifier
@@ -118,7 +118,7 @@ fun AlignYourBodyElement(
 
 
 
-private  val alignYourBodyData = listOf(
+private  val alignQouBodyData = listOf(
     R.drawable.cupcake to R.string.lesve,
     R.drawable.cupcake to R.string.lesve1,
     R.drawable.cupcake to R.string.lesveq,
@@ -135,10 +135,9 @@ private  val alignYourBodyData = listOf(
     R.drawable.cupcake to R.string.lesve1,
     R.drawable.cupcake to R.string.lesve,
     R.drawable.cupcake to R.string.lesve1,
-).map { DrawabliStringPair(it.first, it.second)}
+).map { DrawableStringPair(it.first, it.second)}
 
-
-data class DrawabliStringPair(
+private data class DrawableStringPair(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int
 )

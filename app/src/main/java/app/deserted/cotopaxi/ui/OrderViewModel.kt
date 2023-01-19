@@ -1,7 +1,10 @@
 package app.deserted.cotopaxi.ui
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import app.deserted.cotopaxi.data.OrderUiState
+import com.example.cupcake.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -102,3 +105,29 @@ class OrderViewModel : ViewModel() {
         return dateOptions
     }
 }
+
+
+private  val alignQouBodyData = listOf(
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesveq,
+    R.drawable.cupcake to R.string.lesve1,
+    R.drawable.cupcake to R.string.lesve,
+    R.drawable.cupcake to R.string.lesve1,
+).map { DrawableStringPair(it.first, it.second)}
+
+private data class DrawableStringPair(
+    @DrawableRes val drawable: Int,
+    @StringRes val text: Int
+)
+
