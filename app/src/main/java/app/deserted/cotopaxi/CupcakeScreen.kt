@@ -119,6 +119,7 @@ fun CupcakeApp(
                     },
                     options = flavors.map { id -> context.resources.getString(id) },
                     onSelectionChanged = { viewModel.setFlavor(it) }
+
                 )
             }
             composable(route = CupcakeScreen.Pickup.name) {
