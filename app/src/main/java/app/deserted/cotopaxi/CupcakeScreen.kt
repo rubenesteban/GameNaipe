@@ -4,6 +4,7 @@ package app.deserted.cotopaxi
 import android.content.Context
 import android.content.Intent
 import androidx.annotation.StringRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -28,10 +29,7 @@ import com.example.cupcake.R
 import app.deserted.cotopaxi.data.DataSource.flavors
 import app.deserted.cotopaxi.data.DataSource.quantityOptions
 import app.deserted.cotopaxi.data.OrderUiState
-import app.deserted.cotopaxi.ui.OrderSummaryScreen
-import app.deserted.cotopaxi.ui.OrderViewModel
-import app.deserted.cotopaxi.ui.SelectOptionScreen
-import app.deserted.cotopaxi.ui.StartOrderScreen
+import app.deserted.cotopaxi.ui.*
 
 /**
  * enum values that represent the screens in the app
@@ -70,6 +68,7 @@ fun CupcakeAppBar(
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CupcakeApp(
     modifier: Modifier = Modifier,
@@ -111,26 +110,15 @@ fun CupcakeApp(
             }
             composable(route = CupcakeScreen.Flavor.name) {
                 val context = LocalContext.current
-                SelectOptionScreen(
-                    subtotal = uiState.price,
-                    onNextButtonClicked = { navController.navigate(CupcakeScreen.Pickup.name) },
-                    onCancelButtonClicked = {
-                        cancelOrderAndNavigateToStart(viewModel, navController)
-                    },
-                    options = flavors.map { id -> context.resources.getString(id) },
-                    onSelectionChanged = { viewModel.setFlavor(it) }
-
+                GameScreen(onNextButtonClicked = {
+                    navController.navigate(CupcakeScreen.Pickup.name)
+                    }
                 )
             }
             composable(route = CupcakeScreen.Pickup.name) {
-                SelectOptionScreen(
-                    subtotal = uiState.price,
-                    onNextButtonClicked = { navController.navigate(CupcakeScreen.Summary.name)},
-                    onCancelButtonClicked = {
-                        cancelOrderAndNavigateToStart(viewModel, navController)
-                    },
-                    options = uiState.pickupOptions,
-                    onSelectionChanged = { viewModel.setDate(it) }
+                GameAsk(onNextButtonClicked = {
+                    navController.navigate(CupcakeScreen.Summary.name)
+                }
                 )
             }
             composable(route = CupcakeScreen.Summary.name) {

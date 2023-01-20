@@ -10,18 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.launch
 
-/**
- * Composable that displays the list of items as [RadioButton] options,
- * [onSelectionChanged] lambda that notifies the parent composable when a new value is selected,
- * [onCancelButtonClicked] lambda that cancels the order when user clicks cancel and
- * [onNextButtonClicked] lambda that triggers the navigation to next screen
- */
 
 @ExperimentalFoundationApi
 @Composable
-fun GameScreen(
+fun GameAsk(
     modifier: Modifier = Modifier,
     viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     onNextButtonClicked:() -> Unit ={}
@@ -49,6 +42,7 @@ fun GameScreen(
                 .height(70.dp)
                 .padding(start = 8.dp),
             onClick = onNextButtonClicked
+
         ) {
             Text(text = "Hulk", fontSize = 18.sp)
         }
@@ -60,9 +54,14 @@ fun GameScreen(
             //MasTaskList(list = UserGuess)
 
 
-            WellnesTaskList(list = viewModel.tasks,
-                onCloseTask = {tasks -> viewModel.remove(tasks)},
-                onAddTask = {tasks -> viewModel.gilf(tasks)})
+            WellnesWrapList(
+                list = viewModel.wrap,
+                onCloseTask = { wrap -> viewModel.remove(wrap)},
+                onAddTask = { wrap -> viewModel.gulf(wrap)})
+            WellnesWrapList(
+                list = viewModel.wrap.shuffled(),
+                onCloseTask = { wrap -> viewModel.remove(wrap)},
+                onAddTask = { wrap -> viewModel.gulf(wrap)})
 
         }
 

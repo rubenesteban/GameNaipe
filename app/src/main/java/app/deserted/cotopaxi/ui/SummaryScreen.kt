@@ -89,7 +89,10 @@ fun OrderSummaryScreen(
         Spacer(modifier = Modifier.height(48.dp))
 
         Text(stringResource(R.string.saludo))
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(
+
+
+            8.dp))
         Text(stringResource(R.string.contacto))
         Spacer(modifier = Modifier.height(8.dp))
         Text(stringResource(R.string.telefonos))

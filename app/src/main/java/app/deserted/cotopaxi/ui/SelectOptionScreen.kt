@@ -138,7 +138,7 @@ private  val alignYourBodyData = listOf(
 ).map { DrawabliStringPair(it.first, it.second)}
 
 
-data class DrawabliStringPair(
+private data class DrawabliStringPair(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int
 )
