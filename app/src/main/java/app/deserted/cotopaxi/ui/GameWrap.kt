@@ -44,7 +44,7 @@ fun WellnessWrapItem(
     Card(
         modifier = Modifier
             .width(151.dp)
-            .height(290.dp)
+            .height(234.dp)
             .padding(8.dp)
             .clickable {
                 onClose()

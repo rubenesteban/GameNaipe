@@ -152,7 +152,7 @@ class OrderViewModel : ViewModel() {
 
 
     fun remove(item: Affirmation){
-        val (u)= _uiState.value
+        val (u)= uiState.value
         Log.d(TAG, " it - $u" )
         if(k<= 19){
             _tasks.remove(item)
@@ -201,7 +201,7 @@ class OrderViewModel : ViewModel() {
         traelc.add(fu)
         Log.d(TAG, " it - tuoooo" )
 
-        Log.d(TAG, " it - $j" )
+
         return traelc
     }
 
@@ -237,7 +237,6 @@ private fun loadAffirmations(): List<Affirmation> {
     Affirmation("buddies", R.drawable.undraw_buddies_2ae5),
     Affirmation("by_my_car", R.drawable.undraw_by_my_car_xhk6),
     Affirmation("cat", R.drawable.undraw_cat_s1wg),
-    Affirmation("cloud_hosting", R.drawable.undraw_cloud_hosting_7xb1),
     Affirmation("cooking_ceye", R.drawable.undraw_cooking_ceye),
     Affirmation("decorate_christmas_tree", R.drawable.undraw_decorate_christmas_tree_rmj0),
     Affirmation("doctors", R.drawable.undraw_doctors_p6aq),
@@ -295,7 +294,6 @@ private fun loadAsk(): List<Ask> {
         Ask("buddies", R.drawable.undraw_buddies_2ae5),
         Ask("by_my_car", R.drawable.undraw_by_my_car_xhk6),
         Ask("cat", R.drawable.undraw_cat_s1wg),
-        Ask("cloud_hosting", R.drawable.undraw_cloud_hosting_7xb1),
         Ask("cooking_ceye", R.drawable.undraw_cooking_ceye),
         Ask("decorate_christmas_tree", R.drawable.undraw_decorate_christmas_tree_rmj0),
         Ask("doctors", R.drawable.undraw_doctors_p6aq),
@@ -335,6 +333,6 @@ private fun loadAsk(): List<Ask> {
         Ask("team", R.drawable.undraw_team_up_re_84ok),
         Ask("traveling", R.drawable.undraw_traveling_qio0),
         Ask("winter_skating", R.drawable.undraw_winter_skating_re_qouk),
-        Ask("woman", R.drawable.undraw_woman_re_afr8))
+        Ask("woman", R.drawable.undraw_woman_re_afr8)
     )
 }
