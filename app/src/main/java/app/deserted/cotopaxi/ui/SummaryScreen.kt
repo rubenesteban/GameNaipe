@@ -89,23 +89,21 @@ fun OrderSummaryScreen(
         Spacer(modifier = Modifier.height(48.dp))
 
         Text(stringResource(R.string.saludo))
-        Spacer(modifier = Modifier.height(
-
-
-            8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(stringResource(R.string.contacto))
         Spacer(modifier = Modifier.height(8.dp))
         Text(stringResource(R.string.telefonos))
 
     }
 }
-
+/**
 @Preview
 @Composable
 fun OrderSummaryPreview(){
     OrderSummaryScreen(
-        orderUiState = OrderUiState(0, "Test", "Test", "$300.00"),
+        orderUiState = OrderUiState(0,"hello", "Test", "Test", "$300.00"),
         onSendButtonClicked = { subject: String, summary: String -> },
         onCancelButtonClicked = {}
     )
 }
+*/

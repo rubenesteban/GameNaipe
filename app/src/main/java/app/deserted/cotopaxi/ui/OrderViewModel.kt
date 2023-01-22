@@ -4,8 +4,11 @@ import android.util.DebugUtils
 import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.runtime.toMutableStateList
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.datastore.dataStore
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.deserted.cotopaxi.data.OrderUiState
 import app.deserted.cotopaxi.ui.OrderViewModel.garci.oclose
@@ -15,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -38,7 +42,17 @@ class OrderViewModel : ViewModel() {
      */
     private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
     val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
+    //---------------------------
+    // context
+   // val context = LocalContext.current
+    // scope
+   // val scope = rememberCoroutineScope()
+    // datastore Email
+    //val dataStore = StoreUserEmail(context)
+    // get saved email
+    //val savedEmail = dataStore.getEmail.collectAsState(initial = "")
 
+    //var email by remember { mutableStateOf("") }
 
     //--------------------------
     private val _tasks = libre.toMutableStateList()
@@ -46,7 +60,7 @@ class OrderViewModel : ViewModel() {
         get() = _tasks
     //_________________________________________________
     private var Work: MutableSet<String> = mutableSetOf<String>("")
-
+    private var Trabajo: MutableSet<String> = mutableSetOf<String>("")
     private var k: Int = 0
     private var j: Int = 0
 
@@ -54,6 +68,9 @@ class OrderViewModel : ViewModel() {
     private val _wrap = oclose.toMutableStateList()
     val wrap: List<Ask>
         get() = _wrap
+
+    val parw: List<Ask> = listOf()
+
     //_________________________________________________
     private var traelc: MutableSet<String> = mutableSetOf<String>("")
     //var i : Int = 0
@@ -83,6 +100,10 @@ class OrderViewModel : ViewModel() {
     object garci {
         var oclose = loadAsk().shuffled()
 
+    }
+    fun modmar(): List<Ask> {
+       val parw = wrap.reversed()
+        return parw
     }
 
 
@@ -118,7 +139,7 @@ class OrderViewModel : ViewModel() {
     init {
         unico()
         infimo()
-        our()
+        modmar()
     }
 
 
@@ -145,18 +166,52 @@ class OrderViewModel : ViewModel() {
         return formattedPrice
     }
 
+    fun checkUserGuess(){
+        viewModelScope.launch {
+           var mayor = comprov(Work, Trabajo)
+            Log.d(TAG, " it - $mayor" )
+        }
+    }
+   /**
+    fun star() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                time = true,
+            )
+        }
+    }
+**/
+
+
+
+
     fun our(){
         val(p)= _uiState.value
         Log.d(TAG, " it - $p" )
     }
+    fun remove(item: Ask) {
+        val g = _uiState.value.quantity
+        val fa = item.key
+        Trabajo.add(fa)
+        Log.d(TAG, " it - $Trabajo" )
+        if(j<= g){
+            _wrap.remove(item)
+        }
+        j+=1
 
+    }
 
     fun remove(item: Affirmation){
-        val (u)= uiState.value
-        Log.d(TAG, " it - $u" )
-        if(k<= 19){
+        val u= uiState.value.quantity
+        Log.d(TAG, " it - Hello!" )
+        val fu = item.key
+        Work.add(fu)
+        Log.d(TAG, " it - $Work" )
+        if(k<= u){
             _tasks.remove(item)
+            Log.d(TAG, " it - $k" )
         }
+
         k+=1
     }
 
@@ -165,28 +220,32 @@ class OrderViewModel : ViewModel() {
      */
 
 
-    fun gilf(item: Affirmation): MutableSet<String> {
-        val fu = item.key
-        Log.d(TAG, " it - $fu" )
-        Work.add(fu)
-        Log.d(TAG, " it - tuuuu" )
-        return Work
-    }
-    lateinit var utils: MutableSet<String>
-    fun lista():MutableSet<String> {
-        utils = Work
-        Log.d(TAG, " it - $utils" )
-        return utils
+    fun gilf(item: Affirmation){
+
+        Log.d(TAG, " it - Hello you!" )
+
+
     }
 
+
+
     ////---Wrap--------
-    fun remove(item: Ask) {
-        val (g)= _uiState.value
-        Log.d(TAG, " it - $g" )
-        if(j<= 16){
-            _wrap.remove(item)
+    fun listade(a:MutableSet<String>): List<String> {
+       val ls = a.asSequence().toList()
+        return ls
+
+    }
+
+    fun comprov(a:MutableSet<String>, b:MutableSet<String>): Int {
+       var uno = _uiState.value.quantity
+       var u= 0
+        for (i in 0..uno) {
+            if (listade(a)[i] == listade(b)[i]) {
+                u += 1
+            }
+
         }
-        j+=1
+        return u
 
     }
 
@@ -220,6 +279,7 @@ class OrderViewModel : ViewModel() {
 
 
 }
+
 
 
 

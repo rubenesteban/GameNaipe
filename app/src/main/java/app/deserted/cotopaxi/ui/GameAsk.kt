@@ -3,22 +3,28 @@ package app.deserted.cotopaxi.ui
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
 
 
 @ExperimentalFoundationApi
 @Composable
 fun GameAsk(
     modifier: Modifier = Modifier,
-    viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
-    onNextButtonClicked:() -> Unit ={}
+    viewModel: OrderViewModel = viewModel(),
+    onNextButtonClicked: () -> Unit = {},
+    initialValue: Float = 1f,
+    totalTime: Long,
+
 ) {
 
     val context = LocalContext.current
@@ -30,6 +36,23 @@ fun GameAsk(
     val savedEmail = dataStore.getEmail.collectAsState(initial = "")
 
     var email by remember { mutableStateOf("") }
+
+    var value by remember {
+        mutableStateOf(initialValue)
+    }
+    var currentTime by remember {
+        mutableStateOf(totalTime)
+    }
+    var isTimerRunning by remember {
+        mutableStateOf(true)
+    }
+    LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
+        if(currentTime > 0 && isTimerRunning) {
+            delay(100L)
+            currentTime -= 100L
+            value = currentTime / totalTime.toFloat()
+        }
+    }
 
     Column( modifier = modifier
         .padding(16.dp),
@@ -46,14 +69,19 @@ fun GameAsk(
             ) {
                 Text(text = "Hulk", fontSize = 18.sp)
             }
-            OutlinedTextField(
+            Box(
                 modifier = Modifier
                     .width(151.dp)
                     .height(70.dp)
                     .padding(start = 8.dp),
-                value = email,
-                onValueChange = { email = it },
-            )
+            ){
+                Text(
+                    text = (currentTime / 1000L).toString(),
+                    fontSize = 44.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
 
         }
         TabRowDefaults.Divider(thickness = 1.dp, modifier = modifier.padding(bottom = 8.dp))
@@ -67,11 +95,12 @@ fun GameAsk(
                 onCloseTask = { wrap -> viewModel.remove(wrap)},
                 onAddTask = { wrap -> viewModel.gulf(wrap)})
             WellnesWrapList(
-                list = viewModel.wrap.shuffled(),
+                list = viewModel.modmar(),
                 onCloseTask = { wrap -> viewModel.remove(wrap)},
                 onAddTask = { wrap -> viewModel.gulf(wrap)})
 
         }
+
 
     }
 }

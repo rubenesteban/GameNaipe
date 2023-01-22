@@ -26,7 +26,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cupcake.R
-import app.deserted.cotopaxi.data.DataSource.flavors
 import app.deserted.cotopaxi.data.DataSource.quantityOptions
 import app.deserted.cotopaxi.data.OrderUiState
 import app.deserted.cotopaxi.ui.*
@@ -110,15 +109,19 @@ fun CupcakeApp(
             }
             composable(route = CupcakeScreen.Flavor.name) {
                 val context = LocalContext.current
+
                 GameScreen(onNextButtonClicked = {
                     navController.navigate(CupcakeScreen.Pickup.name)
                     }
+
                 )
             }
             composable(route = CupcakeScreen.Pickup.name) {
-                GameAsk(onNextButtonClicked = {
+                GameAsk(
+                    onNextButtonClicked = {
                     navController.navigate(CupcakeScreen.Summary.name)
-                }
+                },
+                    totalTime = 100L * 1000L,
                 )
             }
             composable(route = CupcakeScreen.Summary.name) {

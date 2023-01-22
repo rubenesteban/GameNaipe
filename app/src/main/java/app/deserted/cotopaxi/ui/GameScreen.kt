@@ -10,9 +10,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+//import kotlinx.coroutines.DefaultExecutor.delay
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -27,7 +30,8 @@ import kotlinx.coroutines.launch
 fun GameScreen(
     modifier: Modifier = Modifier,
     viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
-    onNextButtonClicked:() -> Unit ={}
+    onNextButtonClicked:() -> Unit ={},
+
 ) {
     // context
     val context = LocalContext.current
@@ -41,6 +45,9 @@ fun GameScreen(
     var email by remember { mutableStateOf("") }
 
     //var UserGuess = gameUiState.currentCards
+
+
+
 
     Column(
         modifier = modifier
@@ -59,15 +66,6 @@ fun GameScreen(
             ) {
                 Text(text = "Hulk", fontSize = 18.sp)
             }
-            OutlinedTextField(
-                modifier = Modifier
-                    .width(151.dp)
-                    .height(70.dp)
-                    .padding(start = 8.dp),
-                value = email,
-                onValueChange = { email = it },
-            )
-
         }
         Divider(thickness = 1.dp, modifier = modifier.padding(bottom = 8.dp))
         Row(
