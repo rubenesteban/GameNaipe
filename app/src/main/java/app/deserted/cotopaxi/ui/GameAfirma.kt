@@ -8,14 +8,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,19 +22,23 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun WellnesTaskList(
     list: List<Affirmation>,
-    onCloseTask:(Affirmation) -> Unit,
-    onAddTask:(Affirmation) -> Unit,
+    onCloseTask: (Affirmation) -> Unit,
+    onAlfinTask: (Affirmation) -> Unit,
+    onAddTask: (Affirmation) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyRow(modifier = Modifier) {
         items(items = list, key = { tasks -> tasks.key })
         { tasks ->
-            WellnessQouItem(tasks.drawable,tasks.key,
+            WellnessQouItem(tasks.drawable, tasks.key,
                 onClose = { onCloseTask(tasks) },
-                onAdd = { onCloseTask(tasks)})
+                onAlfin = { onAlfinTask(tasks) },
+                onAdd = { onAddTask(tasks)})
         }
     }
 }
+
+
 
 @Composable
 fun WellnessQouItem(
@@ -45,6 +46,7 @@ fun WellnessQouItem(
     taskName :String,
     onClose: () -> Unit,
     onAdd: () -> Unit,
+    onAlfin: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -54,7 +56,10 @@ fun WellnessQouItem(
             .padding(8.dp)
             .clickable {
                 onClose()
+                onAlfin()
                 onAdd()
+
+
             },
         elevation = 10.dp)
         {

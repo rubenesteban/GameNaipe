@@ -1,29 +1,21 @@
 package app.deserted.cotopaxi.ui
 
-import android.util.DebugUtils
 import android.util.Log
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalContext
-import androidx.datastore.dataStore
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import app.deserted.cotopaxi.data.OrderUiState
+import app.deserted.cotopaxi.data.listA
+import app.deserted.cotopaxi.data.listB
+import app.deserted.cotopaxi.ui.OrderViewModel.garci.l
 import app.deserted.cotopaxi.ui.OrderViewModel.garci.oclose
 import app.deserted.cotopaxi.ui.OrderViewModel.julian.libre
 import com.example.cupcake.R
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
+//import kotlinx.coroutines.flow.internal.NopCollector.emit
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import kotlin.properties.Delegates
 
 /** Price for a single cupcake */
 private const val PRICE_PER_CUPCAKE = 2.00
@@ -40,30 +32,49 @@ class OrderViewModel : ViewModel() {
     /**
      * Cupcake state for this order
      */
-    private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
+    val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
     val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
-    //---------------------------
-    // context
-   // val context = LocalContext.current
-    // scope
-   // val scope = rememberCoroutineScope()
-    // datastore Email
-    //val dataStore = StoreUserEmail(context)
-    // get saved email
-    //val savedEmail = dataStore.getEmail.collectAsState(initial = "")
-
-    //var email by remember { mutableStateOf("") }
 
     //--------------------------
     private val _tasks = libre.toMutableStateList()
     val tasks: List<Affirmation>
         get() = _tasks
+
     //_________________________________________________
     private var Work: MutableSet<String> = mutableSetOf<String>("")
+    private var Oficio: MutableSet<String> = mutableSetOf<String>("")
     private var Trabajo: MutableSet<String> = mutableSetOf<String>("")
     private var k: Int = 0
     private var j: Int = 0
+    private val Guess: Any by lazy { util  }
+    lateinit var pora: String
+    lateinit var erGuss: List<String>
+    lateinit var oro: String
+    ///------------------------------
+    private var userdPalabras: MutableSet<String> = mutableSetOf()
 
+    // __________________________________________________
+    var userPalabras by mutableStateOf("")
+        private  set
+
+
+    //---------------------------
+    private var userdWords: MutableSet<String> = mutableSetOf()
+
+   // __________________________________________________
+    var userGues by mutableStateOf("")
+        private set
+    //lateinit var pura: List<String>
+    var UserGuess: List<String> = listOf()
+    var UserTutu: MutableSet<String> = mutableSetOf<String>("")
+    var Usertutus: List<String> = listOf()
+    var UserYuyu: MutableSet<String> = mutableSetOf<String>("")
+
+    var UserJuess: MutableSet<String> = mutableSetOf<String>("")
+    private set
+    var itil: List<String> = listOf()
+    var carro by mutableStateOf("")
+        private set
     //_-----------------------------------------------
     private val _wrap = oclose.toMutableStateList()
     val wrap: List<Ask>
@@ -73,8 +84,10 @@ class OrderViewModel : ViewModel() {
 
     //_________________________________________________
     private var traelc: MutableSet<String> = mutableSetOf<String>("")
+
     //var i : Int = 0
-    private val TAG: String = "UserPref"
+    private val TAG: String = "Reebook"
+    //private val TAG: String = "Reeboojjjk"
     //------------------------------------------------
     /**
      * Set the quantity [numberCupcakes] of cupcakes for this order's state and update the price
@@ -91,20 +104,29 @@ class OrderViewModel : ViewModel() {
 
     object julian {
         var libre = loadAffirmations().shuffled()
+        val k = 0
 
     }
+
+
     /**
      * Set the [desiredFlavor] of cupcakes for this order's state.
      * Only 1 flavor can be selected for the whole order.
      */
     object garci {
         var oclose = loadAsk().shuffled()
+        val l = 0
 
     }
+
+
+
     fun modmar(): List<Ask> {
-       val parw = wrap.reversed()
+        val parw = wrap.reversed()
         return parw
     }
+
+
 
 
     fun setFlavor(desiredFlavor: String) {
@@ -112,6 +134,62 @@ class OrderViewModel : ViewModel() {
             currentState.copy(flavor = desiredFlavor)
         }
     }
+
+    fun setNaipe(item: List<String>) {
+        _uiState.update { currentState ->
+            currentState.copy(alfin = item)
+        }
+        Elefe(item)
+    }
+
+    fun obtenNaipe(item: List<String>) {
+        _uiState.update { currentState ->
+            currentState.copy(torre = item)
+        }
+        Ramo(item)
+    }
+
+    fun GoCards(item: Affirmation, user:Int) {
+
+    }
+
+    fun setCards(item: Affirmation, user:Int): List<String> {
+        if(k <=user) {
+            Oficio.add(item.key)
+            k += 1
+        }else {
+            val she = listade(Oficio)
+            setNaipe(she)
+            val Guss = turke(she)
+            return Guss
+        }
+        return UserGuess
+    }
+
+
+
+    fun obtenCards(item: Ask, user:Int): List<String> {
+        var pi = k
+        if(pi <=user) {
+            UserTutu.add(item.key)
+            pi += 1
+        }else {
+            val she = listade(UserTutu)
+            val he = listade(Guess as MutableSet<String>)
+            obtenNaipe(she)
+           // val erGuss = turke(she)
+           // val Quor = score(she,he)
+            //val We = mask(she,he, user)
+           // valueCup(Quor)
+            //mino(We)
+             return erGuss
+        }
+        return UserGuess
+    }
+
+
+
+
 
     /**
      * Set the [pickupDate] for this order's state and update the price
@@ -124,22 +202,43 @@ class OrderViewModel : ViewModel() {
             )
         }
     }
-    fun unico(): Int{
-       val i = 1
-        k = i
-        Log.d(TAG, " it - tuuuu" )
-        return k
+
+    fun Datey(UseGuess:List<String>){
+        _uiState.update { currentState ->
+            currentState.copy(
+                alfin = UseGuess
+            )
+        }
+        kuuk(UseGuess)
     }
-    fun infimo(): Int{
-        val i = 1
-        j = i
-        Log.d(TAG, " it - tuuuu" )
-        return j
+
+    fun Ditey(UseGuess:List<String>){
+        _uiState.update { currentState ->
+            currentState.copy(
+                torre = UseGuess
+            )
+        }
+        kaak(UseGuess)
     }
+
+
+
+
+    fun eureca(
+        alfin: List<String> = _uiState.value.alfin,
+        torre: List<String> = _uiState.value.torre,
+    ): Double {
+        val gol = alfin - torre
+        val aro = gol.size.toDouble()
+        return aro
+
+    }
+
+
     init {
-        unico()
-        infimo()
+        reset()
         modmar()
+
     }
 
 
@@ -157,7 +256,7 @@ class OrderViewModel : ViewModel() {
         quantity: Int = _uiState.value.quantity,
         pickupDate: String = _uiState.value.date
     ): String {
-        var calculatedPrice = quantity * PRICE_PER_CUPCAKE
+        var calculatedPrice = quantity * eureca(_uiState.value.alfin,_uiState.value.torre)
         // If the user selected the first option (today) for pickup, add the surcharge
         if (pickupOptions()[0] == pickupDate) {
             calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
@@ -166,67 +265,171 @@ class OrderViewModel : ViewModel() {
         return formattedPrice
     }
 
-    fun checkUserGuess(){
-        viewModelScope.launch {
-           var mayor = comprov(Work, Trabajo)
-            Log.d(TAG, " it - $mayor" )
+
+
+    fun reset() {
+        Work.clear()
+        Trabajo.clear()
+        Oficio.clear()
+        UserJuess.clear()
+        UserTutu.clear()
+
+    }
+
+
+
+    fun remove(item: Ask, User:Int) {
+        var p = k
+        if (p <= User) {
+            _wrap.remove(item)
+            p += 1
+        }
+
+    }
+
+
+    fun remove(item: Affirmation, User:Int) {
+        gray(User)
+        var pan = l
+        if ( pan <= User) {
+            _tasks.remove(item)
+            pan += 1
+            gray(pan)
+        }
+        Log.d(TAG, " Este es shin en Guess------>>> es: $Guess!")
+    }
+
+
+    fun green(s:String){
+          Log.d(TAG, " Este es shin en dook------>>> es: $s!")
+    }
+
+
+    fun gray(s:Int){
+        Log.d(TAG, " Este es shin en dook------>>> es: $s!")
+    }
+
+    fun turke(ra: List<String>): List<String> {
+        val himalaya = ra
+       // Log.d(TAG, " it --------------------------Tortugas Galapagos: $himalaya!")
+        return ra
+    }
+    fun shapk(ra: List<String>): List<String> {
+        val lia = ra
+        //Log.d(TAG, " it --------------------------Shapk in Ocean: $lia!")
+        return ra
+    }
+
+    fun Elefe(ra: List<String>): List<String> {
+        Log.d(TAG, " it --------------------------Elefante in Ocean: $Guess!")
+        val lia = ra
+        Log.d(TAG, " it --------------------------Elefante in Ocean: $lia!")
+        return ra
+
+    }
+
+    fun Ramo(ra: List<String>): List<String> {
+        val lia = ra
+        Log.d(TAG, " it ----------------Este es ballena in Ocean: $lia!")
+        return ra
+
+    }
+
+    fun PalabrasUsa(guessdWord:String, util:Int){
+        var w = l
+        if(w<=util){
+            userGues = guessdWord
+            var hulk = Pick(userGues)
+            w+=1
         }
     }
-   /**
-    fun star() {
+
+    fun Pick(userGues:String): MutableSet<String> {
+        userdWords.add(userGues)
+        val ness = shapk(userdWords)
+        ocasio(ness)
+        return userdWords
+    }
+
+    fun AskUsa(guessdWord:String, util:Int){
+        var e = l
+        if(e<=util){
+            userGues = guessdWord
+            var hulk = Pick(userGues)
+            e+=1
+        }
+    }
+
+    fun Pickat(userGues:String): MutableSet<String> {
+        userdWords.add(userGues)
+        val ness = shapk(userdWords)
+        ocasio(ness)
+        return userdWords
+    }
+
+
+    var util = userdWords
+
+    fun shapk(ra:MutableSet<String>): List<String> {
+        val lia = ra
+        val fruit = listade(lia)
+        Log.d(TAG, " shapk --------------------------Shapk in Ocean: $lia!")
+        return fruit
+    }
+    fun ocasio(f:List<String>){
         _uiState.update { currentState ->
             currentState.copy(
-                time = true,
+                alfin = f
             )
         }
-    }
-**/
-
-
-
-
-    fun our(){
-        val(p)= _uiState.value
-        Log.d(TAG, " it - $p" )
-    }
-    fun remove(item: Ask) {
-        val g = _uiState.value.quantity
-        val fa = item.key
-        Trabajo.add(fa)
-        Log.d(TAG, " it - $Trabajo" )
-        if(j<= g){
-            _wrap.remove(item)
-        }
-        j+=1
 
     }
 
-    fun remove(item: Affirmation){
-        val u= uiState.value.quantity
-        Log.d(TAG, " it - Hello!" )
-        val fu = item.key
-        Work.add(fu)
-        Log.d(TAG, " it - $Work" )
-        if(k<= u){
-            _tasks.remove(item)
-            Log.d(TAG, " it - $k" )
-        }
-
-        k+=1
+    fun luuk(ra: List<String>): List<String> {
+        val himalaya = ra
+       // Log.d(TAG, " it -------------------------- himalaya: $himalaya!")
+        return ra
     }
 
-    /**
+    fun katey(ra: List<String>): List<String> {
+        val himalaya = ra
+        Log.d(TAG, " it ---este es el----------- Ruco - Pichincha: $himalaya!")
+        return ra
+    }
+
+    fun kuuk(ra: List<String>): List<String> {
+        val himalaya = ra
+        Log.d(TAG, " it -------------------Chimborazo: $himalaya!")
+        return ra
+    }
+
+    fun kaak(ra: List<String>): List<String> {
+        val himalaya = ra
+        Log.d(TAG, " it ----------------Cotopaxi: $himalaya!")
+        return ra
+    }
+
+
+       /**
      * Returns a list of date options starting with the current date and the following 3 dates.
      */
 
-
-    fun gilf(item: Affirmation){
-
-        Log.d(TAG, " it - Hello you!" )
+    fun dulf(item: List<String>) {
+        val toque = item
+       Datey(item)
+           // katey(item)
+        shapk(item)
 
 
     }
 
+    fun gulf(item: List<String>) {
+        val toque = item
+        katey(item)
+        Ditey(item)
+
+
+    }
 
 
     ////---Wrap--------
@@ -236,33 +439,26 @@ class OrderViewModel : ViewModel() {
 
     }
 
-    fun comprov(a:MutableSet<String>, b:MutableSet<String>): Int {
-       var uno = _uiState.value.quantity
-       var u= 0
-        for (i in 0..uno) {
-            if (listade(a)[i] == listade(b)[i]) {
-                u += 1
+    fun mask(a:List<String>,b:List<String>,c:Int): Int {
+        var j = l
+        for (i in 0..c-1){
+            if (a[i] == b[i] ){
+                j+= 1
             }
-
         }
-        return u
-
+        return j
     }
 
+    fun score(a: List<String>, b: List<String>): Int {
+        val two = a - b
+        val tree = two.size
+        return tree
+    }
 
     /**
      * Returns a list of date options starting with the current date and the following 3 dates.
      */
-    lateinit var utilss: MutableSet<String>
-    fun gulf(item: Ask): MutableSet<String> {
-        val fu = item.key
-        Log.d(TAG, " it - $fu" )
-        traelc.add(fu)
-        Log.d(TAG, " it - tuoooo" )
 
-
-        return traelc
-    }
 
     private fun pickupOptions
                 (): List<String> {

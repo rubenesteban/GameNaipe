@@ -9,8 +9,8 @@ object DataSource {
     )
 
     val quantityOptions = listOf(
-        Pair(R.string.one_cupcake, 1),
-        Pair(R.string.six_cupcakes, 6),
-        Pair(R.string.twelve_cupcakes, 12)
+        Pair(R.string.one_cupcake, 10),
+        Pair(R.string.six_cupcakes, 16),
+        Pair(R.string.twelve_cupcakes, 33)
     )
 }

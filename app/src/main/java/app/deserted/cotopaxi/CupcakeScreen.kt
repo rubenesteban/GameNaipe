@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cupcake.R
 import app.deserted.cotopaxi.data.DataSource.quantityOptions
 import app.deserted.cotopaxi.data.OrderUiState
+import app.deserted.cotopaxi.data.listade
 import app.deserted.cotopaxi.ui.*
 
 /**
@@ -108,19 +109,24 @@ fun CupcakeApp(
                 )
             }
             composable(route = CupcakeScreen.Flavor.name) {
-                val context = LocalContext.current
+               // val context = LocalContext.current
 
-                GameScreen(onNextButtonClicked = {
-                    navController.navigate(CupcakeScreen.Pickup.name)
+                GameScreen(
+                    orderUiState = uiState,
+                    onNextButtonClicked = {
+                        viewModel.uiState.value.tity
+                        navController.navigate(CupcakeScreen.Pickup.name)
                     }
-
                 )
             }
             composable(route = CupcakeScreen.Pickup.name) {
+                //val context = LocalContext.current
                 GameAsk(
+                    orderUiState = uiState,
                     onNextButtonClicked = {
+                        viewModel.uiState.value.tity
                     navController.navigate(CupcakeScreen.Summary.name)
-                },
+                    },
                     totalTime = 100L * 1000L,
                 )
             }
@@ -133,7 +139,8 @@ fun CupcakeApp(
                     },
                     onSendButtonClicked = { subject: String, summary: String ->
                         shareOrder(context, subject = subject, summary = summary)
-                    }
+                    },
+
                 )
             }
         }

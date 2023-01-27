@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import app.deserted.cotopaxi.data.OrderUiState
 import kotlinx.coroutines.delay
 
 
@@ -20,12 +21,14 @@ import kotlinx.coroutines.delay
 @Composable
 fun GameAsk(
     modifier: Modifier = Modifier,
+    orderUiState: OrderUiState,
     viewModel: OrderViewModel = viewModel(),
     onNextButtonClicked: () -> Unit = {},
     initialValue: Float = 1f,
     totalTime: Long,
 
-) {
+
+    ) {
 
     val context = LocalContext.current
     // scope
@@ -89,15 +92,16 @@ fun GameAsk(
             .padding(16.dp),
         ){
 
-
             WellnesWrapList(
                 list = viewModel.wrap,
-                onCloseTask = { wrap -> viewModel.remove(wrap)},
-                onAddTask = { wrap -> viewModel.gulf(wrap)})
+                onCloseTask = { wrap -> viewModel.remove(wrap,orderUiState.quantity)},
+                onAddTask = { wrap -> viewModel.obtenCards(wrap, orderUiState.quantity) },
+                onAlfinTask = {  viewModel.gulf(orderUiState.alfin)})
             WellnesWrapList(
                 list = viewModel.modmar(),
-                onCloseTask = { wrap -> viewModel.remove(wrap)},
-                onAddTask = { wrap -> viewModel.gulf(wrap)})
+                onCloseTask = { wrap -> viewModel.remove(wrap,orderUiState.quantity)},
+                onAddTask = {wrap -> viewModel.obtenCards(wrap, orderUiState.quantity) },
+                onAlfinTask = {  viewModel.gulf(orderUiState.alfin)})
 
         }
 

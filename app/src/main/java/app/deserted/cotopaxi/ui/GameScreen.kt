@@ -3,20 +3,16 @@ package app.deserted.cotopaxi.ui
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TabRowDefaults.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.deserted.cotopaxi.data.OrderUiState
 //import kotlinx.coroutines.DefaultExecutor.delay
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * Composable that displays the list of items as [RadioButton] options,
@@ -28,11 +24,15 @@ import kotlinx.coroutines.launch
 @ExperimentalFoundationApi
 @Composable
 fun GameScreen(
+    orderUiState: OrderUiState,
     modifier: Modifier = Modifier,
     viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     onNextButtonClicked:() -> Unit ={},
 
-) {
+
+
+    ) {
+    var selectedValue by rememberSaveable { mutableStateOf("")}
     // context
     val context = LocalContext.current
     // scope
@@ -45,9 +45,6 @@ fun GameScreen(
     var email by remember { mutableStateOf("") }
 
     //var UserGuess = gameUiState.currentCards
-
-
-
 
     Column(
         modifier = modifier
@@ -72,12 +69,16 @@ fun GameScreen(
             modifier = modifier
                 .padding(16.dp),
         ) {
-            WellnesTaskList(list = viewModel.tasks,
-                onCloseTask = { tasks -> viewModel.remove(tasks) },
-                onAddTask = { tasks -> viewModel.gilf(tasks) })
+            WellnesTaskList(
+                list = viewModel.tasks,
+                onCloseTask = { tasks -> viewModel.remove(tasks, orderUiState.quantity) },
+                onAlfinTask = { tasks -> viewModel.PalabrasUsa(tasks.key,orderUiState.quantity) },
+                onAddTask = { tasks -> viewModel.GoCards(tasks, orderUiState.quantity) })
         }
 
     }
 }
+
+
 
 
