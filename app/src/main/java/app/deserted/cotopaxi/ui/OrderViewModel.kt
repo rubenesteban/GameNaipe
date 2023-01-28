@@ -3,6 +3,7 @@ package app.deserted.cotopaxi.ui
 import android.util.Log
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import app.deserted.cotopaxi.data.OrderUiState
 import app.deserted.cotopaxi.data.listA
 import app.deserted.cotopaxi.data.listB
@@ -10,7 +11,9 @@ import app.deserted.cotopaxi.ui.OrderViewModel.garci.l
 import app.deserted.cotopaxi.ui.OrderViewModel.garci.oclose
 import app.deserted.cotopaxi.ui.OrderViewModel.julian.libre
 import com.example.cupcake.R
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 //import kotlinx.coroutines.flow.internal.NopCollector.emit
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -47,6 +50,7 @@ class OrderViewModel : ViewModel() {
     private var k: Int = 0
     private var j: Int = 0
     private val Guess: Any by lazy { util  }
+    private val kuess: Any by lazy { mil  }
     lateinit var pora: String
     lateinit var erGuss: List<String>
     lateinit var oro: String
@@ -59,9 +63,11 @@ class OrderViewModel : ViewModel() {
 
 
     //---------------------------
-    private var userdWords: MutableSet<String> = mutableSetOf()
+        private var userdWords: MutableSet<String> = mutableSetOf()
 
-   // __________________________________________________
+        private var usePalabras: MutableSet<String> = mutableSetOf()
+
+    // __________________________________________________
     var userGues by mutableStateOf("")
         private set
     //lateinit var pura: List<String>
@@ -139,7 +145,7 @@ class OrderViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(alfin = item)
         }
-        Elefe(item)
+        //Elefe(item)
     }
 
     fun obtenNaipe(item: List<String>) {
@@ -168,25 +174,25 @@ class OrderViewModel : ViewModel() {
 
 
 
-    fun obtenCards(item: Ask, user:Int): List<String> {
-        var pi = k
-        if(pi <=user) {
-            UserTutu.add(item.key)
-            pi += 1
-        }else {
-            val she = listade(UserTutu)
-            val he = listade(Guess as MutableSet<String>)
-            obtenNaipe(she)
-           // val erGuss = turke(she)
-           // val Quor = score(she,he)
-            //val We = mask(she,he, user)
-           // valueCup(Quor)
-            //mino(We)
-             return erGuss
+    fun obtenCards(item: String, user:Int): List<String> {
+        if(si <=user) {
+            UserTutu.add(item)
+            var tirma = Guess.toString()
+           // val pudo = grillo(ti)
+            //pudo.add(item)
+            Log.d(TAG, " Este es shin en UserYuyu----->>> es: $Guess!")
+
+            si += 1
         }
+
+
         return UserGuess
     }
 
+    fun grillo(a:List<String>):MutableSet<String>{
+        val el = a as MutableSet<String>
+        return el
+    }
 
 
 
@@ -233,12 +239,23 @@ class OrderViewModel : ViewModel() {
         return aro
 
     }
-
-
+    var f = k
+    var r = k
+    var si = k
+    var e = k
+    var w = k
+    var m = k
+    var te = k
     init {
         reset()
         modmar()
-
+        f=0
+        r=0
+        si=0
+        e=0
+        w=0
+        m=0
+        te=0
     }
 
 
@@ -267,6 +284,25 @@ class OrderViewModel : ViewModel() {
 
 
 
+
+    fun remove(item: Affirmation, User:Int) {
+        if (f <= User) {
+            _tasks.remove(item)
+            f += 1
+            green(f)
+        }
+        Emonti()
+    }
+
+
+    fun tera(a:MutableSet<String>, b:MutableSet<String>): Int {
+     val car = listade(a)
+     var bote = listade(b)
+     var yate = car - bote
+     var elfo = yate.size
+     return elfo
+    }
+
     fun reset() {
         Work.clear()
         Trabajo.clear()
@@ -279,30 +315,38 @@ class OrderViewModel : ViewModel() {
 
 
     fun remove(item: Ask, User:Int) {
-        var p = k
-        if (p <= User) {
+        if (r <= User) {
             _wrap.remove(item)
-            p += 1
+            r += 1
         }
+        Emonti()
+    }
 
+    fun tilo(s:Int){
+        Log.d(TAG, " Este es shin en marutana----->>> es: $s!")
     }
 
 
-    fun remove(item: Affirmation, User:Int) {
-        gray(User)
-        var pan = l
-        if ( pan <= User) {
-            _tasks.remove(item)
-            pan += 1
-            gray(pan)
-        }
-        Log.d(TAG, " Este es shin en Guess------>>> es: $Guess!")
+    fun gratu(s:Int){
+        Log.d(TAG, " Este es shin en daak------>>> es: $s!")
+    }
+
+    fun gretu(s:Int){
+        Log.d(TAG, " Este es shin en deek------>>> es: $s!")
     }
 
 
-    fun green(s:String){
+
+    fun green(s:Int){
           Log.d(TAG, " Este es shin en dook------>>> es: $s!")
     }
+
+
+
+    fun griin(s:Int){
+        Log.d(TAG, " griin en el valor de  resta----->>> es: $s!")
+    }
+
 
 
     fun gray(s:Int){
@@ -320,11 +364,12 @@ class OrderViewModel : ViewModel() {
         return ra
     }
 
-    fun Elefe(ra: List<String>): List<String> {
-        Log.d(TAG, " it --------------------------Elefante in Ocean: $Guess!")
-        val lia = ra
-        Log.d(TAG, " it --------------------------Elefante in Ocean: $lia!")
-        return ra
+    fun Emonti() {
+        Log.d(TAG, " it Emonti--------------------------Elefante in Ocean: $kuess!")
+
+        Log.d(TAG, " it Emonti--------------------------Elefante in Ocean: $Guess!")
+        var grin = checkUserGuess()
+        Log.d(TAG, " it Emonti--------------------------Elefante in Ocean: $grin!")
 
     }
 
@@ -336,7 +381,6 @@ class OrderViewModel : ViewModel() {
     }
 
     fun PalabrasUsa(guessdWord:String, util:Int){
-        var w = l
         if(w<=util){
             userGues = guessdWord
             var hulk = Pick(userGues)
@@ -352,23 +396,36 @@ class OrderViewModel : ViewModel() {
     }
 
     fun AskUsa(guessdWord:String, util:Int){
-        var e = l
-        if(e<=util){
-            userGues = guessdWord
-            var hulk = Pick(userGues)
-            e+=1
+
+        if(te<=util){
+            userPalabras = guessdWord
+            var hulk = Pickat(userPalabras)
+            te+=1
         }
     }
 
     fun Pickat(userGues:String): MutableSet<String> {
-        userdWords.add(userGues)
-        val ness = shapk(userdWords)
+        userdPalabras.add(userGues)
+        val ness = shapk(userdPalabras)
         ocasio(ness)
-        return userdWords
+        return userdPalabras
     }
 
 
     var util = userdWords
+    var mil = userdPalabras
+
+
+    var li = Guess
+    var lo = kuess
+    var hello = listade(Guess as MutableSet<String>)
+    var chao = listade(kuess as MutableSet<String>)
+    var cull = hello - chao
+    val numeros = flowOf(hello)
+    val letras = flowOf(chao)
+
+    var tingo = cull.size
+    var sdi = griin(tingo)
 
     fun shapk(ra:MutableSet<String>): List<String> {
         val lia = ra
@@ -384,6 +441,20 @@ class OrderViewModel : ViewModel() {
         }
 
     }
+
+
+    fun checkUserGuess(){
+        viewModelScope.launch {
+            delay(3000)
+            numeros.combine(letras){numero, letra  ->
+                "$numero, $letra"
+            }
+        }
+    }
+
+
+
+
 
     fun luuk(ra: List<String>): List<String> {
         val himalaya = ra
@@ -440,13 +511,12 @@ class OrderViewModel : ViewModel() {
     }
 
     fun mask(a:List<String>,b:List<String>,c:Int): Int {
-        var j = l
-        for (i in 0..c-1){
+        for (i in 0..c){
             if (a[i] == b[i] ){
-                j+= 1
+                m+= 1
             }
         }
-        return j
+        return m
     }
 
     fun score(a: List<String>, b: List<String>): Int {
