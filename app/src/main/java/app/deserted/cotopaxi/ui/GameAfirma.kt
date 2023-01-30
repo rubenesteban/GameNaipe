@@ -24,7 +24,7 @@ fun WellnesTaskList(
     list: List<Affirmation>,
     onCloseTask: (Affirmation) -> Unit,
     onAlfinTask: (Affirmation) -> Unit,
-    onAddTask: (Affirmation) -> Unit,
+    onAddTask: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyRow(modifier = Modifier) {
@@ -33,7 +33,7 @@ fun WellnesTaskList(
             WellnessQouItem(tasks.drawable, tasks.key,
                 onClose = { onCloseTask(tasks) },
                 onAlfin = { onAlfinTask(tasks) },
-                onAdd = { onAddTask(tasks)})
+                onAdd = { onAddTask()})
         }
     }
 }
@@ -68,6 +68,7 @@ fun WellnessQouItem(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
 
                 Image(painter = painterResource(drawable),
                     contentDescription = null,

@@ -1,9 +1,19 @@
 package app.deserted.cotopaxi.data
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-fun main() {
-   mask()
+import kotlin.system.measureTimeMillis
+
+fun main() = runBlocking{
+    val tiempo = measureTimeMillis {
+        val gol = correr()
+            println(gol)
+    }
+    println("Recoger en $tiempo millisegundos")
 }
 
 
@@ -12,15 +22,56 @@ var listA = listOf<String>("a","s","f","h","p","l")
 var listB = listOf<String>("a","s","f","g","o","l")
 val flow = flow<String>{
     for (i in 1..10){
-        emit("Hola $i")
+        delay(100)
+        var userGues = "Hola $i"
+        emit(userGues)
+    }
+
+}
+
+// __________________________________________________
+var userPalabras by mutableStateOf("")
+    private  set
+
+
+//---------------------------
+private var WordsUsadas: MutableSet<String> = mutableSetOf()
+
+private var usePalabras: MutableSet<String> = mutableSetOf()
+
+// __________________________________________________
+var userGues by mutableStateOf("")
+    private set
+
+
+suspend fun  correr() {
+    try{
+        val ulti = flow.collect { userGues ->
+         golpe(userGues)
+        }
+    } catch (e: Exception){
+        println("The flow es $e")
     }
 }
 
-
-
-suspend fun  correr(){
-    flow.collect{ println(it)}
+fun golpe(s:String): MutableSet<String> {
+    WordsUsadas.add(s)
+    return WordsUsadas
 }
+
+
+fun pasar(s: MutableSet<String>): List<String> {
+    val pera = listar(s)
+    return pera
+}
+
+
+fun listar(a: MutableSet<String>): List<String> {
+    val ls = a.asSequence().toList()
+    return ls
+
+}
+
 
 fun mask(){
     var j = 0
@@ -31,20 +82,10 @@ fun mask(){
     }
     println(j)
 }
-fun listade(a:List<String>): Sequence<String> {
+fun listade(a: List<String>): Sequence<String> {
     val ls = a.asSequence()
     return ls
 
-}
-
-fun comprov(a:List<String>, b:List<String>): Int {
-    var u = 0
-    for (it in 1..6) {
-        if (listade(a).map { it } == listade(b).map { it }) {
-            u += 1
-        }
-    }
-    return u
 }
 
 fun secul(){

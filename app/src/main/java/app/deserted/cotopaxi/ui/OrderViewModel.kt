@@ -5,20 +5,20 @@ import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.deserted.cotopaxi.data.OrderUiState
-import app.deserted.cotopaxi.data.listA
-import app.deserted.cotopaxi.data.listB
-import app.deserted.cotopaxi.ui.OrderViewModel.garci.l
 import app.deserted.cotopaxi.ui.OrderViewModel.garci.oclose
 import app.deserted.cotopaxi.ui.OrderViewModel.julian.libre
 import com.example.cupcake.R
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
+//import kotlinx.coroutines.flow.internal.NopCollector.emit
 import kotlinx.coroutines.launch
 //import kotlinx.coroutines.flow.internal.NopCollector.emit
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlin.system.measureTimeMillis
 
 /** Price for a single cupcake */
 private const val PRICE_PER_CUPCAKE = 2.00
@@ -49,27 +49,38 @@ class OrderViewModel : ViewModel() {
     private var Trabajo: MutableSet<String> = mutableSetOf<String>("")
     private var k: Int = 0
     private var j: Int = 0
-    private val Guess: Any by lazy { util  }
-    private val kuess: Any by lazy { mil  }
+    private val Guess: Any by lazy { util }
+    private val kuess: Any by lazy { mil }
+    private val Fuess: Any by lazy { sos }
+
     lateinit var pora: String
     lateinit var erGuss: List<String>
     lateinit var oro: String
+
+    private var userIndixe: MutableSet<String> = mutableSetOf()
+
     ///------------------------------
     private var userdPalabras: MutableSet<String> = mutableSetOf()
 
     // __________________________________________________
     var userPalabras by mutableStateOf("")
-        private  set
+        private set
 
+    private var Palabras: MutableSet<String> = mutableSetOf()
+
+    // __________________________________________________
+    var EnPalabras by mutableStateOf("")
+        private set
 
     //---------------------------
-        private var userdWords: MutableSet<String> = mutableSetOf()
+    private var userdWords: MutableSet<String> = mutableSetOf()
 
-        private var usePalabras: MutableSet<String> = mutableSetOf()
+    private var usePalabras: MutableSet<String> = mutableSetOf()
 
     // __________________________________________________
     var userGues by mutableStateOf("")
         private set
+
     //lateinit var pura: List<String>
     var UserGuess: List<String> = listOf()
     var UserTutu: MutableSet<String> = mutableSetOf<String>("")
@@ -77,10 +88,11 @@ class OrderViewModel : ViewModel() {
     var UserYuyu: MutableSet<String> = mutableSetOf<String>("")
 
     var UserJuess: MutableSet<String> = mutableSetOf<String>("")
-    private set
+        private set
     var itil: List<String> = listOf()
     var carro by mutableStateOf("")
         private set
+
     //_-----------------------------------------------
     private val _wrap = oclose.toMutableStateList()
     val wrap: List<Ask>
@@ -127,12 +139,11 @@ class OrderViewModel : ViewModel() {
 
 
 
+
     fun modmar(): List<Ask> {
         val parw = wrap.reversed()
         return parw
     }
-
-
 
 
     fun setFlavor(desiredFlavor: String) {
@@ -155,46 +166,39 @@ class OrderViewModel : ViewModel() {
         Ramo(item)
     }
 
-    fun GoCards(item: Affirmation, user:Int) {
+    fun GoCards(item: Affirmation, user: Int) {
 
     }
 
-    fun setCards(item: Affirmation, user:Int): List<String> {
-        if(k <=user) {
+    fun setCards(item: Affirmation, user: Int): List<String> {
+        if (k <= user) {
             Oficio.add(item.key)
             k += 1
-        }else {
+        } else {
             val she = listade(Oficio)
             setNaipe(she)
-            val Guss = turke(she)
-            return Guss
+            // val Guss = turke(she)
+            // return Guss
         }
         return UserGuess
     }
 
 
-
-    fun obtenCards(item: String, user:Int): List<String> {
-        if(si <=user) {
+    fun obtenCards(item: String, user: Int): List<String> {
+        if (si <= user) {
             UserTutu.add(item)
             var tirma = Guess.toString()
-           // val pudo = grillo(ti)
-            //pudo.add(item)
-            Log.d(TAG, " Este es shin en UserYuyu----->>> es: $Guess!")
 
             si += 1
         }
 
-
         return UserGuess
     }
 
-    fun grillo(a:List<String>):MutableSet<String>{
+    fun grillo(a: List<String>): MutableSet<String> {
         val el = a as MutableSet<String>
         return el
     }
-
-
 
 
     /**
@@ -209,25 +213,23 @@ class OrderViewModel : ViewModel() {
         }
     }
 
-    fun Datey(UseGuess:List<String>){
+    fun Datey(UseGuess: List<String>) {
         _uiState.update { currentState ->
             currentState.copy(
                 alfin = UseGuess
             )
         }
-        kuuk(UseGuess)
+        luuk(UseGuess)
     }
 
-    fun Ditey(UseGuess:List<String>){
+    fun Ditey(UseGuess: List<String>) {
         _uiState.update { currentState ->
             currentState.copy(
                 torre = UseGuess
             )
         }
-        kaak(UseGuess)
+        //kaak(UseGuess)
     }
-
-
 
 
     fun eureca(
@@ -239,6 +241,7 @@ class OrderViewModel : ViewModel() {
         return aro
 
     }
+
     var f = k
     var r = k
     var si = k
@@ -246,16 +249,17 @@ class OrderViewModel : ViewModel() {
     var w = k
     var m = k
     var te = k
+
     init {
         reset()
         modmar()
-        f=0
-        r=0
-        si=0
-        e=0
-        w=0
-        m=0
-        te=0
+        f = 0
+        r = 0
+        si = 0
+        e = 0
+        w = 0
+        m = 0
+        te = 0
     }
 
 
@@ -273,7 +277,7 @@ class OrderViewModel : ViewModel() {
         quantity: Int = _uiState.value.quantity,
         pickupDate: String = _uiState.value.date
     ): String {
-        var calculatedPrice = quantity * eureca(_uiState.value.alfin,_uiState.value.torre)
+        var calculatedPrice = quantity * eureca(_uiState.value.alfin, _uiState.value.torre)
         // If the user selected the first option (today) for pickup, add the surcharge
         if (pickupOptions()[0] == pickupDate) {
             calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
@@ -283,24 +287,22 @@ class OrderViewModel : ViewModel() {
     }
 
 
-
-
-    fun remove(item: Affirmation, User:Int) {
+    fun remove(item: Affirmation, User: Int) {
         if (f <= User) {
             _tasks.remove(item)
             f += 1
             green(f)
         }
-        Emonti()
+        //Emonti()
     }
 
 
-    fun tera(a:MutableSet<String>, b:MutableSet<String>): Int {
-     val car = listade(a)
-     var bote = listade(b)
-     var yate = car - bote
-     var elfo = yate.size
-     return elfo
+    fun tera(a: MutableSet<String>, b: MutableSet<String>): Int {
+        val car = listade(a)
+        val bote = listade(b)
+        val yate = car - bote
+        val elfo = yate.size
+        return elfo
     }
 
     fun reset() {
@@ -313,65 +315,95 @@ class OrderViewModel : ViewModel() {
     }
 
 
-
-    fun remove(item: Ask, User:Int) {
+    fun remove(item: Ask, User: Int) {
         if (r <= User) {
             _wrap.remove(item)
             r += 1
         }
-        Emonti()
+
     }
 
-    fun tilo(s:Int){
-        Log.d(TAG, " Este es shin en marutana----->>> es: $s!")
-    }
-
-
-    fun gratu(s:Int){
-        Log.d(TAG, " Este es shin en daak------>>> es: $s!")
-    }
-
-    fun gretu(s:Int){
-        Log.d(TAG, " Este es shin en deek------>>> es: $s!")
+    fun hulkk(s: Int) {
+         Log.d(TAG, " Este es el numero de palabas----->>> es: $s!")
     }
 
 
 
-    fun green(s:Int){
-          Log.d(TAG, " Este es shin en dook------>>> es: $s!")
+    fun green(s: Int) {
+        //  Log.d(TAG, " Este es shin en dook------>>> es: $s!")
     }
 
 
-
-    fun griin(s:Int){
-        Log.d(TAG, " griin en el valor de  resta----->>> es: $s!")
+    fun griin(s: Int) {
+        // Log.d(TAG, " griin en el valor de  resta----->>> es: $s!")
     }
 
 
+    suspend fun foit(s: Int) {
+        Log.d(TAG, " S. foit en numeros de desacietos ----->>> es: $s!")
+    }
 
-    fun gray(s:Int){
+
+    suspend fun fuit(s: Int) {
+        Log.d(TAG, " S. fuit en lo combin ----->>> es: $s!")
+    }
+
+    fun nuevo(): String {
+        val tuday = "hola"
+       // gray(tuday)
+        return tuday
+    }
+
+    fun Hirmen(){
+
+       // Log.d(TAG, " Gran en Gess ----->>> es: $Guess!")
+       // Log.d(TAG, " Gran en kuess ----->>> es: $Kuess!")
+       // Log.d(TAG, " Gran en Fuess ----->>> es: $Fuess!")
+    }
+
+    fun bueno(d:Int){
+        Log.d(TAG, " Bueno en Palabras ----->>> es: $Palabras!")
+        Log.d(TAG, " Bueno en userdWords ----->>> es: $userdWords!")
+        Log.d(TAG, " Bueno en userIndixe ----->>> es: $userIndixe!")
+        Log.d(TAG, " Bueno en userdPalabras ---->>> es: $userdPalabras!")
+    }
+
+    fun gray(s: String) {
         Log.d(TAG, " Este es shin en dook------>>> es: $s!")
-    }
-
-    fun turke(ra: List<String>): List<String> {
-        val himalaya = ra
-       // Log.d(TAG, " it --------------------------Tortugas Galapagos: $himalaya!")
-        return ra
-    }
-    fun shapk(ra: List<String>): List<String> {
-        val lia = ra
-        //Log.d(TAG, " it --------------------------Shapk in Ocean: $lia!")
-        return ra
-    }
-
-    fun Emonti() {
-        Log.d(TAG, " it Emonti--------------------------Elefante in Ocean: $kuess!")
-
-        Log.d(TAG, " it Emonti--------------------------Elefante in Ocean: $Guess!")
-        var grin = checkUserGuess()
-        Log.d(TAG, " it Emonti--------------------------Elefante in Ocean: $grin!")
+        //var tinrin = MielUserGuess()
+        Log.d(TAG, " it Emonti--------------------------Guess in Ocean: $Guess!")
+        //val grin = checkUserGuess()
+       // Log.d(TAG, " it Emonti--------------------------CheckUserGuess: $grin!")
+        Log.d(TAG, " it Emonti--------------------------Kuess in Ocean: $kuess!")
+        Log.d(TAG, " it Emonti--------------------------Fuess in Ocean: $Fuess!")
 
     }
+
+    fun griy(s: String) {
+        Log.d(TAG, " Este es Enpalabras----->>> es: $s!")
+    }
+
+    fun grey(s: Int) {
+        Log.d(TAG, " Este es el tamani de palabras----->>> es: $s!")
+    }
+
+    fun click(s: String) {
+        Log.d(TAG, " Click este es el valor pura en Affirmation->>> es: $s!")
+    }
+
+    fun click1(s: String) {
+        Log.d(TAG, " Click este es el valor pura en Ask--->>> es: $s!")
+    }
+
+
+    fun click2(s: String) {
+        Log.d(TAG, " Click este es el valor pura en fuera el scope--->>> es: $s!")
+    }
+
+    fun porany(s: String) {
+        Log.d(TAG, "Porany es el valor de words----->>> es: $s!")
+    }
+
 
     fun Ramo(ra: List<String>): List<String> {
         val lia = ra
@@ -380,140 +412,196 @@ class OrderViewModel : ViewModel() {
 
     }
 
-    fun PalabrasUsa(guessdWord:String, util:Int){
+    fun PalabrasUsa(guessdWord:String, util:Int): MutableSet<String> {
         if(w<=util){
             userGues = guessdWord
-            var hulk = Pick(userGues)
-            w+=1
+            pora = guessdWord
+            oro = guessdWord
+            click1(pora)
+            click1(oro)
+          var hulk = Pick(userGues)
+          w += 1
         }
-    }
-
-    fun Pick(userGues:String): MutableSet<String> {
-        userdWords.add(userGues)
-        val ness = shapk(userdWords)
-        ocasio(ness)
         return userdWords
     }
 
-    fun AskUsa(guessdWord:String, util:Int){
 
-        if(te<=util){
+     fun Pick(userGues: String): MutableSet<String> {
+        userdWords.add(userGues)
+        val ness = shapk(userdWords)
+        val hull = ness.size
+        grey(hull)
+        Datey(ness)
+        //val por = flowOf(userdWords)
+        return userdWords
+    }
+
+    fun AskUsa(guessdWord: String, t:Int) {
+        if (w <= t) {
             userPalabras = guessdWord
             var hulk = Pickat(userPalabras)
             te+=1
         }
+
+            //var helk = Pick(userPalabras)
     }
 
-    fun Pickat(userGues:String): MutableSet<String> {
+    fun Pickat(userGues: String): MutableSet<String> {
         userdPalabras.add(userGues)
-        val ness = shapk(userdPalabras)
-        ocasio(ness)
+        val pi = userdPalabras
+        val e = pi.size
+
+        //griiny(e)
         return userdPalabras
     }
 
+    fun PalabrasUsadas(userGues: String): Flow<String> {
+        pora = userGues
+        //click1(pora)
+        Palabras.add(pora)
+        val uno = flow<String> {emit(pora)  }
+
+        return uno
+    }
+
+
+
+        fun checkUserGuess(){
+        viewModelScope.launch {
+           var der =  before(pora).collect{pora -> Palabras.add(pora)}
+            Log.d(TAG, "CheckUserGuess --------------------------userIndixe: $userIndixe!")
+        }
+    }
+
+
+    suspend fun before(s:String): Flow<String> {
+        val flow = flow<String>{pora}
+        return flow
+    }
+
+    fun PalabrasAsk(userGues: String): Flow<String> {
+        pora = userGues
+        //click2(pora)
+        Palabras.add(pora)
+        val other = flow<String> {emit(pora)  }
+
+        return other
+    }
+
+
+    suspend fun fibonacci(s:String): Flow<String> = flow {
+        emit(pora)
+    }
+
+    fun checkPalabras(){
+        viewModelScope.launch {
+            var der =  fibonacci(pora).collect{pora -> userIndixe.add(pora)}
+            Log.d(TAG, "CheckPalabras --------------------------UserIndixe: $userIndixe!")
+        }
+    }
+
+    fun checkPalabrasUsadas(){
+        viewModelScope.launch {
+            val tiempo = measureTimeMillis {
+                val job1 = async { checkPalabras() }
+                Log.d(TAG, "CheckPalabras --------------------------UserIndixe: $job1!")
+                val job2 = async { checkUserGuess() }
+                Log.d(TAG, "CheckUserGuess --------------------------UserIndixe: $job2!")
+
+                job1.join()
+                job2.join()
+
+               // Log.d(TAG, "CheckUserGuess --------------------------UserIndixe: $job3!")
+            }
+
+            Log.d(TAG, "Tiempo transcurido:-------------------------->>>>: $tiempo!")
+
+        }
+    }
 
     var util = userdWords
-    var mil = userdPalabras
+    var mil = "electro()"
+    var sos = "electro()"
 
+   // var sur = electro()
 
-    var li = Guess
-    var lo = kuess
-    var hello = listade(Guess as MutableSet<String>)
-    var chao = listade(kuess as MutableSet<String>)
-    var cull = hello - chao
-    val numeros = flowOf(hello)
-    val letras = flowOf(chao)
-
-    var tingo = cull.size
-    var sdi = griin(tingo)
-
-    fun shapk(ra:MutableSet<String>): List<String> {
+    fun shapk(ra: MutableSet<String>): List<String> {
         val lia = ra
         val fruit = listade(lia)
         Log.d(TAG, " shapk --------------------------Shapk in Ocean: $lia!")
         return fruit
     }
-    fun ocasio(f:List<String>){
+
+
+    fun ocasio(f: List<String>) {
         _uiState.update { currentState ->
             currentState.copy(
-                alfin = f
+                alfin =f
             )
         }
 
     }
 
 
-    fun checkUserGuess(){
-        viewModelScope.launch {
-            delay(3000)
-            numeros.combine(letras){numero, letra  ->
-                "$numero, $letra"
-            }
-        }
-    }
 
+
+    var yuo = "elefante"
+    var yi = "uiguan"
+
+   // var ten =  updateUserGuess(yuo)
+    var con = griy(EnPalabras)
+    //var teni =  updateUserGuess(yi)
+
+    var en = griy(EnPalabras)
+
+
+
+    var tu = Job()
+    //var sos = operan
 
 
 
 
     fun luuk(ra: List<String>): List<String> {
         val himalaya = ra
-       // Log.d(TAG, " it -------------------------- himalaya: $himalaya!")
+         Log.d(TAG, " it -------------------------- himalaya: $himalaya!")
         return ra
     }
 
-    fun katey(ra: List<String>): List<String> {
+
+    fun liik(ra: List<String>): List<String> {
         val himalaya = ra
-        Log.d(TAG, " it ---este es el----------- Ruco - Pichincha: $himalaya!")
+       // Log.d(TAG, " it -------------------------- Ruco Pichimcha: $himalaya!")
         return ra
-    }
-
-    fun kuuk(ra: List<String>): List<String> {
-        val himalaya = ra
-        Log.d(TAG, " it -------------------Chimborazo: $himalaya!")
-        return ra
-    }
-
-    fun kaak(ra: List<String>): List<String> {
-        val himalaya = ra
-        Log.d(TAG, " it ----------------Cotopaxi: $himalaya!")
-        return ra
-    }
-
-
-       /**
-     * Returns a list of date options starting with the current date and the following 3 dates.
-     */
-
-    fun dulf(item: List<String>) {
-        val toque = item
-       Datey(item)
-           // katey(item)
-        shapk(item)
-
-
     }
 
     fun gulf(item: List<String>) {
         val toque = item
-        katey(item)
-        Ditey(item)
-
-
+        liik(item)
+        // katey(item)
+        // Ditey(item)
     }
 
 
     ////---Wrap--------
-    fun listade(a:MutableSet<String>): List<String> {
-       val ls = a.asSequence().toList()
+    fun listade(a: MutableSet<String>): List<String> {
+        val ls = a.asSequence().toList()
         return ls
 
     }
 
-    fun mask(a:List<String>,b:List<String>,c:Int): Int {
-        for (i in 0..c){
-            if (a[i] == b[i] ){
-                m+= 1
+    fun listar(a: MutableSet<String>): List<String> {
+        val ls = a.asSequence().toList()
+        return ls
+
+    }
+
+
+    fun mask(a: List<String>, b: List<String>, c: Int): Int {
+        var m = 0
+        for (i in 0..c) {
+            if (a[i] == b[i]) {
+                m += 1
             }
         }
         return m
@@ -530,8 +618,7 @@ class OrderViewModel : ViewModel() {
      */
 
 
-    private fun pickupOptions
-                (): List<String> {
+    private fun pickupOptions(): List<String> {
         val dateOptions = mutableListOf<String>()
         val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
         val calendar = Calendar.getInstance()
@@ -540,11 +627,9 @@ class OrderViewModel : ViewModel() {
             dateOptions.add(formatter.format(calendar.time))
             calendar.add(Calendar.DATE, 1)
         }
-        return dateOptions
+            return dateOptions
+        }
     }
-
-
-}
 
 
 
