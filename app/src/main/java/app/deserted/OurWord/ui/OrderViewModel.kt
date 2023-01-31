@@ -164,46 +164,6 @@ class OrderViewModel : ViewModel() {
         //Elefe(item)
     }
 
-    fun obtenNaipe(item: List<String>) {
-        _uiState.update { currentState ->
-            currentState.copy(torre = item)
-        }
-        Ramo(item)
-    }
-
-    fun GoCards(item: Affirmation, user: Int) {
-
-    }
-
-    fun setCards(item: Affirmation, user: Int): List<String> {
-        if (k <= user) {
-            Oficio.add(item.key)
-            k += 1
-        } else {
-            val she = listade(Oficio)
-            setNaipe(she)
-            // val Guss = turke(she)
-            // return Guss
-        }
-        return UserGuess
-    }
-
-
-    fun obtenCards(item: String, user: Int): List<String> {
-        if (si <= user) {
-            UserTutu.add(item)
-            var tirma = Guess.toString()
-
-            si += 1
-        }
-
-        return UserGuess
-    }
-
-    fun grillo(a: List<String>): MutableSet<String> {
-        val el = a as MutableSet<String>
-        return el
-    }
 
 
     /**
@@ -237,15 +197,6 @@ class OrderViewModel : ViewModel() {
     }
 
 
-    fun eureca(
-        alfin: List<String> = _uiState.value.alfin,
-        torre: List<String> = _uiState.value.torre,
-    ): Double {
-        val gol = alfin - torre
-        val aro = gol.size.toDouble()
-        return aro
-
-    }
 
     var f = k
     var r = k
@@ -308,13 +259,6 @@ class OrderViewModel : ViewModel() {
     }
 
 
-    fun tera(a: MutableSet<String>, b: MutableSet<String>): Int {
-        val car = listade(a)
-        val bote = listade(b)
-        val yate = car - bote
-        val elfo = yate.size
-        return elfo
-    }
 
     fun reset() {
         Work.clear()
@@ -335,9 +279,6 @@ class OrderViewModel : ViewModel() {
         checkPalabrasUsadas()
     }
 
-    fun hulkk(s: Int) {
-         Log.d(TAG, " Este es el numero de palabas----->>> es: $s!")
-    }
 
 
 
@@ -346,54 +287,8 @@ class OrderViewModel : ViewModel() {
     }
 
 
-    fun griin(s: Int) {
-        // Log.d(TAG, " griin en el valor de  resta----->>> es: $s!")
-    }
 
 
-    suspend fun foit(s: Int) {
-        Log.d(TAG, " S. foit en numeros de desacietos ----->>> es: $s!")
-    }
-
-
-    suspend fun fuit(s: Int) {
-        Log.d(TAG, " S. fuit en lo combin ----->>> es: $s!")
-    }
-
-    fun nuevo(): String {
-        val tuday = "hola"
-       // gray(tuday)
-        return tuday
-    }
-
-    fun Hirmen(){
-
-       // Log.d(TAG, " Gran en Gess ----->>> es: $Guess!")
-       // Log.d(TAG, " Gran en kuess ----->>> es: $Kuess!")
-       // Log.d(TAG, " Gran en Fuess ----->>> es: $Fuess!")
-    }
-
-    fun bueno(d:Int){
-        Log.d(TAG, " Bueno en Palabras ----->>> es: $Palabras!")
-        Log.d(TAG, " Bueno en userdWords ----->>> es: $userdWords!")
-        Log.d(TAG, " Bueno en userIndixe ----->>> es: $userIndixe!")
-        Log.d(TAG, " Bueno en userdPalabras ---->>> es: $userdPalabras!")
-    }
-
-    fun gray(s: String) {
-        Log.d(TAG, " Este es shin en dook------>>> es: $s!")
-        //var tinrin = MielUserGuess()
-        Log.d(TAG, " it Emonti--------------------------Guess in Ocean: $Guess!")
-        //val grin = checkUserGuess()
-       // Log.d(TAG, " it Emonti--------------------------CheckUserGuess: $grin!")
-        Log.d(TAG, " it Emonti--------------------------Kuess in Ocean: $kuess!")
-        Log.d(TAG, " it Emonti--------------------------Fuess in Ocean: $Fuess!")
-
-    }
-
-    fun griy(s: String) {
-        Log.d(TAG, " Este es Enpalabras----->>> es: $s!")
-    }
 
     fun grey(s: Int) {
         Log.d(TAG, " Este es el tamani de palabras----->>> es: $s!")
@@ -434,13 +329,6 @@ class OrderViewModel : ViewModel() {
     }
 
 
-    fun Ramo(ra: List<String>): List<String> {
-        val lia = ra
-       // Log.d(TAG, " it ----------------Este es ballena in Ocean: $lia!")
-        return ra
-
-    }
-
     fun PalabrasUsa(guessdWord:String, util:Int): MutableSet<String> {
         if(w<=util){
             userGues = guessdWord
@@ -479,14 +367,11 @@ class OrderViewModel : ViewModel() {
         userdPalabras.add(userGues)
         val pi = userdPalabras
         val e = pi.size
-
-        //griiny(e)
         return userdPalabras
     }
 
     fun PalabrasUsadas(userGues: String): Flow<String> {
         pora = userGues
-
         Palabras.add(pora)
         val uno = flow<String> {emit(pora)}
         return uno
@@ -494,7 +379,7 @@ class OrderViewModel : ViewModel() {
 
 
 
-        fun checkUserGuess(){
+    fun checkUserGuess(){
         viewModelScope.launch {
            var der =  before(pora).collect{pora -> Palabras.add(pora)}
            // Log.d(TAG, "CheckUserGuess --------------------------Palabras: $Palabras!")
@@ -545,8 +430,6 @@ class OrderViewModel : ViewModel() {
                // oro = erGuss
                 Log.d(TAG, "CheckPalabrasUsadas -------------------------->>He: $he!")
                 var ten = verPalabras.add(erGuss)
-
-
                 val we = listade(usePalabras)
                 val they = listade(verPalabras)
                 val elefant = we - they
@@ -558,9 +441,9 @@ class OrderViewModel : ViewModel() {
                 job2.join()
                // checkScore()
                  Log.d(TAG, "it --------------------------UserIn------------->>: $Our!")
-                var P = mar(Our)
+                val P = mar(Our)
                 var Q = setFlavor(P)
-                var Y = "tiempo"
+                val Y = "tiempo"
                 setDate(Y)
                 // Log.d(TAG, "CheckUserGuess --------------------------UserIndixe: $job3!")
             }
@@ -614,9 +497,8 @@ class OrderViewModel : ViewModel() {
         }
     }
 
-    suspend fun Scorein(){
-        checkScore()
-    }
+
+
     var util = userdWords
     var mil = "hello"
     var sos = "electro()"
@@ -711,8 +593,6 @@ class OrderViewModel : ViewModel() {
         }
             return dateOptions
         }
-
-
     }
 
 
