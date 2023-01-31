@@ -14,41 +14,41 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Cotopaxi</string>
+    <string name="app_name">Our Word</string>
     <string name="lesve">Please</string>
     <string name="lesve1">Everthing</string>
-    <string name="lesveq">Cotopaxi</string>
-    <string name="order_cupcakes">Orden de Cotopaxi</string>
-    <string name="one_cupcake">Un Cotopaxi</string>
-    <string name="six_cupcakes">Seis Cotopaxis</string>
-    <string name="twelve_cupcakes">Doce Cotopaxis</string>
-    <string name="choose_flavor">Selecciona tu Favorito</string>
+    <string name="lesveq">Our Word</string>
+    <string name="order_cupcakes">Play with you!</string>
+    <string name="one_cupcake">Easy</string>
+    <string name="six_cupcakes">Intermediate</string>
+    <string name="twelve_cupcakes">Hard</string>
+    <string name="choose_flavor">Select your round</string>
     <string name="vanilla">Vanilla</string>
     <string name="chocolate">Chocolate</string>
     <string name="red_velvet">Red Velvet</string>
     <string name="salted_caramel">Salted Caramel</string>
     <string name="coffee">Coffee</string>
     <string name="special_flavor">Especial Sabor</string>
-    <string name="cancel">Cancelar</string>
+    <string name="cancel">Go back to play</string>
     <string name="next">Siguiente</string>
-    <string name="choose_pickup_date">Selecciona la fecha</string>
-    <string name="order_summary">Tu pedido Es:</string>
-    <string name="send">WhatsApp</string>
-    <string name="quantity">Cantidad</string>
-    <string name="flavor">Sabor</string>
-    <string name="pickup_date">Fecha de Entrega</string>
-    <string name="subtotal_price">Subtotal %s</string>
+    <string name="choose_pickup_date">Remember your goals</string>
+    <string name="order_summary">Your score today is:</string>
+    <string name="send">Share with friends</string>
+    <string name="quantity">Hits</string>
+    <string name="flavor">Time</string>
+    <string name="pickup_date">Score</string>
+    <string name="subtotal_price">Score total %s</string>
     <string name="total_price">Total %s</string>
     <string name="new_cupcake_order">Nueva Orden</string>
     <string name="saludo">Estamos Gustosos de Servirte!</string>
     <string name="contacto">Puedes Contactarnos a los Telefonos:</string>
     <string name="telefonos">0999812880 - 0960096928</string>
-    <string name="order_details">Cantidad: %1$s \n Sabor: %2$s \nFecha de Entrega: %3$s \n
-        Total: %4$s \n\n Gracias!</string>
+    <string name="order_details">Hits: %1$s \n Time: %2$s \nScore %3$s \n
+       https://n9.cl/our-word: %4$s \n\n Thank you!</string>
     <string name="back_button">Atras</string>
     <plurals name="cupcakes">
-        <item quantity="one">%d Cotopaxi</item>
-        <item quantity="other">%d Cotopaxis</item>
+        <item quantity="one">%d Hits</item>
+        <item quantity="other">%d Hits</item>
     </plurals>
 
 </resources>
