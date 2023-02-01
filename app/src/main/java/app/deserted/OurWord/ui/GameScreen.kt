@@ -72,7 +72,7 @@ fun GameScreen(
             WellnesTaskList(
                 list = viewModel.tasks,
                 onCloseTask = { tasks -> viewModel.remove(tasks, orderUiState.quantity) },
-                onAlfinTask = { tasks -> viewModel.PalabrasUsadas(tasks.key)},
+                onAlfinTask = { tasks -> viewModel.PalabrasUsadas(tasks.key, orderUiState.quantity)},
                 onAddTask = { viewModel.gulf(orderUiState.alfin) })
         }
     }

@@ -30,7 +30,7 @@ import app.deserted.OurWord.data.DataSource.quantityOptions
 import app.deserted.OurWord.data.OrderUiState
 import app.deserted.OurWord.ui.*
 //import app.deserted.OurWord.listade
-import app.deserted.cotopaxi.ui.*
+import app.deserted.OurWord.ui.*
 
 /**
  * enum values that represent the screens in the app
@@ -106,6 +106,7 @@ fun CupcakeApp(
                     onNextButtonClicked = {
                         viewModel.setQuantity(it)
                         navController.navigate(CupcakeScreen.Flavor.name)
+                        viewModel.uiState.value.alfin
                     }
                 )
             }
@@ -115,8 +116,10 @@ fun CupcakeApp(
                 GameScreen(
                     orderUiState = uiState,
                     onNextButtonClicked = {
-                        viewModel.uiState.value.tity
+
                         navController.navigate(CupcakeScreen.Pickup.name)
+                        viewModel.uiState.value.alfin
+                        viewModel.uiState.value.torre
                     }
                 )
             }
@@ -125,8 +128,10 @@ fun CupcakeApp(
                 GameAsk(
                     orderUiState = uiState,
                     onNextButtonClicked = {
-                        viewModel.uiState.value.tity
+                        viewModel.uiState.value.quantity
                     navController.navigate(CupcakeScreen.Summary.name)
+                        viewModel.uiState.value.alfin
+                        viewModel.uiState.value.torre
                     },
                     totalTime = 100L * 1000L,
                 )

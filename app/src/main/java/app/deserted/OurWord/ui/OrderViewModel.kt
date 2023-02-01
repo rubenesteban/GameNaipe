@@ -9,6 +9,7 @@ import app.deserted.OurWord.ui.OrderViewModel.garci.oclose
 import app.deserted.OurWord.ui.OrderViewModel.julian.libre
 import com.example.cupcake.R
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 //import kotlinx.coroutines.flow.internal.NopCollector.emit
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlin.properties.Delegates
 import kotlin.system.measureTimeMillis
 
 /** Price for a single cupcake */
@@ -55,10 +57,14 @@ class OrderViewModel : ViewModel() {
     lateinit var pora: String
     lateinit var erGuss: String
     lateinit var oro: String
+    lateinit var user: String
+    var can by Delegates.notNull<Int>()
+    var ten by Delegates.notNull<Int>()
 
     private var userIndixe: MutableSet<String> = mutableSetOf()
 
     ///------------------------------
+
     private var userdPalabras: MutableSet<String> = mutableSetOf()
 
     // __________________________________________________
@@ -73,6 +79,7 @@ class OrderViewModel : ViewModel() {
 
     //---------------------------
     private var userdWords: MutableSet<String> = mutableSetOf()
+    private var intercambio: MutableSet<String> = mutableSetOf()
 
     private var usePalabras: MutableSet<String> = mutableSetOf()
     private var verPalabras: MutableSet<String> = mutableSetOf()
@@ -80,11 +87,12 @@ class OrderViewModel : ViewModel() {
     // __________________________________________________
     var userGues by mutableStateOf("")
         private set
-
-    //lateinit var pura: List<String>
+    lateinit var pera: List<String>
+    lateinit var pura: List<String>
     var UserGuess: List<String> = listOf()
     var UserTutu: MutableSet<String> = mutableSetOf<String>("")
     var Usertutus: List<String> = listOf()
+    var Usertotos: List<String> = listOf()
     var UserYuyu: MutableSet<String> = mutableSetOf<String>("")
 
     var UserJuess: MutableSet<String> = mutableSetOf<String>("")
@@ -126,6 +134,10 @@ class OrderViewModel : ViewModel() {
 
     }
 
+        var uno = _uiState.value.quantity
+
+        var two = click1(uno)
+
 
     /**
      * Set the [desiredFlavor] of cupcakes for this order's state.
@@ -137,10 +149,21 @@ class OrderViewModel : ViewModel() {
 
     }
 
+    var util = "pura"
+    //var cor = chon(pera)
+   // var ron = click(cor)
+
+
+
     fun hola(){
         pora = "hello"
         oro = "world"
         erGuss = "-:)"
+        user = "elo"
+        can = 11
+        ten = 1
+        pura = listOf("a", "b", "c")
+        pera = listOf("a", "b", "c", "d")
     }
 
 
@@ -193,7 +216,7 @@ class OrderViewModel : ViewModel() {
                 torre = UseGuess
             )
         }
-        //kaak(UseGuess)
+        liik(UseGuess)
     }
 
 
@@ -205,6 +228,7 @@ class OrderViewModel : ViewModel() {
     var w = k
     var m = k
     var te = k
+    var h =k
 
     init {
         reset()
@@ -217,6 +241,7 @@ class OrderViewModel : ViewModel() {
         w = 0
         m = 0
         te = 0
+        h = k
     }
 
 
@@ -255,7 +280,9 @@ class OrderViewModel : ViewModel() {
             f += 1
             green(f)
         }
-        //Emonti()
+       // checkUserGuess(User)
+        //checkPalabras(User)
+        //Bull(User)
     }
 
 
@@ -266,6 +293,7 @@ class OrderViewModel : ViewModel() {
         Oficio.clear()
         UserJuess.clear()
         UserTutu.clear()
+        UserYuyu.clear()
 
     }
 
@@ -275,8 +303,10 @@ class OrderViewModel : ViewModel() {
             _wrap.remove(item)
             r += 1
         }
-       // click5("rabit")
-        checkPalabrasUsadas()
+       // checkPalabras(User)
+        //checkUserGuess(User)
+
+        //Bull(User)
     }
 
 
@@ -294,13 +324,13 @@ class OrderViewModel : ViewModel() {
         Log.d(TAG, " Este es el tamani de palabras----->>> es: $s!")
     }
 
-    fun click(s: String) {
+    fun click(s: List<String>) {
         Log.d(TAG, " Click este es el valor pura en Affirmation->>> es: $s!")
     }
 
-    fun click1(s: String) {
-        checkUserGuess()
-      //  Log.d(TAG, " Click este es el valor pura en Ask--->>> es: $s!")
+    fun click1(s: Int) {
+       // checkUserGuess()
+       Log.d(TAG, " Click este es el valor pura en Ask--->>> es: $s!")
     }
 
 
@@ -324,13 +354,9 @@ class OrderViewModel : ViewModel() {
         Log.d(TAG, " Los elemantos son igual a-------------------->>> es: $l!")
     }
 
-    fun porany(s: String) {
-       // Log.d(TAG, "Porany es el valor de words----->>> es: $s!")
-    }
 
-
-    fun PalabrasUsa(guessdWord:String, util:Int): MutableSet<String> {
-        if(w<=util){
+    fun PalabrasUsa(guessdWord:String, mas:Int): MutableSet<String> {
+        if(w<=mas){
             userGues = guessdWord
             pora = guessdWord
             oro = guessdWord
@@ -370,20 +396,48 @@ class OrderViewModel : ViewModel() {
         return userdPalabras
     }
 
-    fun PalabrasUsadas(userGues: String): Flow<String> {
+    fun PalabrasUsadas(userGues: String, u:Int): MutableSet<String> {
         pora = userGues
         Palabras.add(pora)
-        val uno = flow<String> {emit(pora)}
-        return uno
+        //val uno = flow<String> {emit(pora)}
+        //Bill(u)
+        checkMito(u)
+        return Palabras
+    }
+
+    suspend fun kar(y:Int){
+        Bill(y)
+    }
+
+    fun checkMito(g:Int) {
+        viewModelScope.launch {
+           val tino = kar(g)
+        }
     }
 
 
 
-    fun checkUserGuess(){
+    fun checkUserGuess(h:Int): List<String> {
         viewModelScope.launch {
            var der =  before(pora).collect{pora -> Palabras.add(pora)}
-           // Log.d(TAG, "CheckUserGuess --------------------------Palabras: $Palabras!")
+            if(pora !="hello" && can >= h ) {
+                val user = pora
+                var can = UserYuyu.size
+                UserYuyu.add(user)
+                if (can == h) {
+                    Usertutus = listade(UserYuyu)
+                    Log.d(TAG, "Hello --------------------------nilo: $Usertutus!")
+                    Datey(Usertutus)
+                   // pura = Usertutus
+                    Ditey(Usertutus)
+                    //chon(pera)
+
+                }
+                Usertutus
+            }
+            return@launch
         }
+        return Usertutus
     }
 
 
@@ -392,13 +446,13 @@ class OrderViewModel : ViewModel() {
         emit(pora)
     }
 
-    fun PalabrasAsk(userGues: String): Flow<String> {
+    fun PalabrasAsk(userGues: String): MutableSet<String> {
         oro = userGues
 
         userIndixe.add(oro)
-        val other = flow<String> {emit(oro)  }
+        //val other = flow<String> {emit(oro)  }
 
-        return other
+        return userIndixe
     }
 
 
@@ -406,30 +460,156 @@ class OrderViewModel : ViewModel() {
                 emit(oro)
     }
 
-    fun checkPalabras(){
+    fun checkPalabras(g:Int): List<String> {
         viewModelScope.launch {
             var der =  fibonacci(oro).collect{oro -> userIndixe.add(oro)}
-          //  Log.d(TAG, "CheckPalabras --------------------------UserIndixe: $userIndixe!")
+            if ( oro != "world" && ten <= g) {
+                var ten = intercambio.size
+                val user = oro
+                intercambio.add(user)
+                if (ten == g) {
+                    Usertotos = listade(intercambio)
+                    Log.d(TAG, "hola --------------------------User: $Usertotos!")
+                    Datey(Usertotos)
+                    Ditey(Usertotos)
+                }
+
+                Usertotos
+
+            }
+            return@launch
+
+        }
+        return Usertotos
+
+    }
+
+    fun Bill(z:Int){
+        viewModelScope.launch{
+            val tiempo: Long = measureTimeMillis {
+                //val job1 = async { checkPalabras(z) }
+                var tren =  checkUserGuess(z)
+                delay(1000)
+                var gull =  checkPalabras(z)
+                Log.d(TAG, "Bull -----------en---------------tren: $pura!")
+                Log.d(TAG, "Bull -----------en---------------gull : $gull!")
+              //  job1.join()
+              //  job2.join()
+               pura = tren
+                var jaque = pura - gull
+                var mate = jaque.size
+                Log.d(TAG, "Bull -----------en---------------jaque: $jaque!")
+                Log.d(TAG, "Bull -----------en---------------mate : $mate!")
+            }
+            Log.d(TAG, "Bull -----------en---------------Tiempo Total trascurido : $tiempo!")
+
 
         }
     }
 
-    fun checkPalabrasUsadas(){
+    fun Bull(z:Int){
+        viewModelScope.launch{
+        val tiempo: Long = measureTimeMillis {
+            //val job1 = async { checkPalabras(z) }
+            val job2 = async { checkUserGuess(z) }
+            delay(1000)
+            val job1 = async { checkPalabras(z) }
+            Log.d(TAG, "Bull -----------en---------------job1: $job1!")
+            Log.d(TAG, "Bull -----------en---------------job2 : $job2!")
+            job1.join()
+            job2.join()
+        }
+        Log.d(TAG, "Bull -----------en---------------job2 : $tiempo!")
+
+        }
+    }
+    fun arbol(l: List<String>){
+        Log.d(TAG, "Arbol -----------com---------------Tiempo : $l!")
+
+    }
+
+    var three = _uiState.value.alfin
+    var cafe = arbol(three)
+
+
+    var tree = _uiState.value.torre
+    var fe = arbol(tree)
+
+
+    fun MiraPalabras(){
         viewModelScope.launch {
-            var i=0
-            val tiempo = measureTimeMillis {
-                val job1 = async { checkPalabras() }
+           // val job1 = async { checkPalabras() }
+           // val job2 = async { checkUserGuess() }
+          //  job1.join()
+          //  job2.join()
+            var i = h
+
+            if(pora !="hello" && can >= 10 ){
+                val user = pora
+                var can = UserYuyu.size
+               // Log.d(TAG, "MiraPalabras -----------en---------------yupi: $can!")
+                i=+1
+                UserYuyu.add(user)
+                if (can == 10){
+
+                     Usertutus = listade(UserYuyu)
+                    Log.d(TAG, "Hello --------------------------nilo: $Usertutus!")
+                    Datey(Usertutus)
+
+                }
+
+                //Log.d(TAG, "MiraPalabras --------------------------UserYuyu: $UserYuyu!")
+               // Log.d(TAG, "MiraPalabras -----------en---------------yupi: $i!")
+
+            }else if ( oro != "world" && ten <= 10){
+                var ten = intercambio.size
+                val user = oro
+                intercambio.add(user)
+               // Log.d(TAG, "MiraPalabras -------------helllo -------------UserYuyu: $UserYuyu!")
+                Log.d(TAG, "Size de lukk ------------it--------------UserYuyu: $ten!")
+                if (ten == 12){
+                    Usertotos = listade(intercambio)
+                    Log.d(TAG, "hola --------------------------User: $Usertotos!")
+                }
+               // Log.d(TAG, "MiraPalabras -----------hilo---------------UserYuyu: $hilo!")
+                i += 1
+                //Log.d(TAG, "MiraPalabras -----------en---------------yupi: $i!")
+            }
+            var ten = intercambio.size
+            var can = UserYuyu.size
+
+             val neo: List<String> = Usertotos - Usertutus
+             val lukk = neo.size
+
+           Log.d(TAG, "Size de lukk ------------it--------------UserYuyu: $lukk!")
+            //var i = h
+           // var n = h
+            
+
+        }
+    }
+
+    fun checkPalabrasUsadas() {
+        viewModelScope.launch {
+
+
+            var Utus: List<String> = listOf()
+            val tiempo:Long = measureTimeMillis {
+               // val job1 = async { checkPalabras() }
                 //Log.d(TAG, "CheckPalabras --------------------------UserIndixe: $job1!")
                // Log.d(TAG, "CheckPalabras --------------------------UserIndixe: $pora!")
-                var  she = usePalabras.add(pora)
-                Log.d(TAG, "CheckPalabrasUsadas --------------------------She: $she!")
-                val job2 = async { checkUserGuess() }
+                val she = usePalabras.add(pora)
+                Log.d(TAG, "CheckPalabrasUsadas --------------------------She: $usePalabras!")
+              //  val job2 = async { checkUserGuess() }
                // Log.d(TAG, "CheckUserGuess --------------------------UserIndixe: $job2!")
-                var  he = verPalabras.add(oro)
+                val he = userIndixe.add(oro)
                 //pora = erGuss
                // oro = erGuss
-                Log.d(TAG, "CheckPalabrasUsadas -------------------------->>He: $he!")
-                var ten = verPalabras.add(erGuss)
+                Log.d(TAG, "CheckPalabrasUsadas -------------------------->>He: $userIndixe!")
+               // var ten = verPalabras.add(erGuss)
+                val you = _uiState.value.quantity
+                Log.d(TAG, "El valor de Quantity -------------------------->>You: $you!")
+
                 val we = listade(usePalabras)
                 val they = listade(verPalabras)
                 val elefant = we - they
@@ -437,8 +617,8 @@ class OrderViewModel : ViewModel() {
                 val Our = elefant.size
 
                 click5(Our)
-                job1.join()
-                job2.join()
+                //job1.join()
+               // job2.join()
                // checkScore()
                  Log.d(TAG, "it --------------------------UserIn------------->>: $Our!")
                 val P = mar(Our)
@@ -453,13 +633,18 @@ class OrderViewModel : ViewModel() {
 
         }
 
+    }
+
+    fun elo(l:List<String>){
+        val tu = l
+        Log.d(TAG, "Elo --------------------------Respuesta del Alfin: $tu!")
 
     }
 
-        fun mar (i:Int): String {
-            var can = i.toString()
-            return can
-        }
+    fun mar (i:Int): String {
+        val can = i.toString()
+        return can
+    }
 
     fun checkScore(){
         viewModelScope.launch {
@@ -480,14 +665,14 @@ class OrderViewModel : ViewModel() {
     fun CheckLibras(){
         viewModelScope.launch {
             val tiempo = measureTimeMillis {
-                val job1 = async { checkPalabras() }
-                Log.d(TAG, "CheckPalabras --------------------------UserIndixe: $job1!")
-                val job2 = async { checkUserGuess() }
-                Log.d(TAG, "CheckUserGuess --------------------------UserIndixe: $job2!")
+               // val job1 = async { checkPalabras() }
+              //  Log.d(TAG, "CheckPalabras --------------------------UserIndixe: $job1!")
+               // val job2 = async { checkUserGuess() }
+               // Log.d(TAG, "CheckUserGuess --------------------------UserIndixe: $job2!")
                 val job3 = async { checkScore() }
 
-                job1.join()
-                job2.join()
+              //  job1.join()
+             //   job2.join()
                 job3.join()
                 // checkScore()
 
@@ -499,7 +684,7 @@ class OrderViewModel : ViewModel() {
 
 
 
-    var util = userdWords
+   // var util = userdWords
     var mil = "hello"
     var sos = "electro()"
 
@@ -534,16 +719,28 @@ class OrderViewModel : ViewModel() {
 
     fun liik(ra: List<String>): List<String> {
         val himalaya = ra
-       // Log.d(TAG, " it -------------------------- Ruco Pichimcha: $himalaya!")
+        Log.d(TAG, " it -------------------------- Ruco Pichimcha: $himalaya!")
         return ra
     }
 
     fun gulf(item: List<String>) {
         val toque = item
-        checkPalabrasUsadas()
-        liik(item)
+        //checkPalabrasUsadas()
+       // MiraPalabras()
+        elo(item)
         // katey(item)
         // Ditey(item)
+       // checkUserGuess()
+    }
+
+    fun dulf(item: List<String>) {
+        val toque = item
+        //checkPalabrasUsadas()
+        //MiraPalabras()
+        elo(item)
+        // katey(item)
+        // Ditey(item)
+       // checkPalabras()
     }
 
 
@@ -554,8 +751,8 @@ class OrderViewModel : ViewModel() {
 
     }
 
-    fun listar(a: MutableSet<String>): List<String> {
-        val ls = a.asSequence().toList()
+    fun listar(a: List<String>): MutableSet<String> {
+        val ls = a.asSequence().toMutableSet()
         return ls
 
     }

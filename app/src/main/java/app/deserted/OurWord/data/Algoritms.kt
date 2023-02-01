@@ -22,8 +22,8 @@ var listA = listOf<String>("a","s","f","h","p","l")
 var listB = listOf<String>("a","s","f","g","o","l")
 val flow = flow<String>{
     for (i in 1..10){
-        delay(100)
-        var userGues = "Hola $i"
+        delay(1000)
+        val userGues = "Hola $i"
         emit(userGues)
     }
 
@@ -44,17 +44,20 @@ var userGues by mutableStateOf("")
     private set
 
 
-suspend fun  correr() {
+suspend fun  correr(): MutableSet<String> {
     try{
         val ulti = flow.collect { userGues ->
-         golpe(userGues)
+        val gutf = golpe(userGues)
         }
+        val gulf = golpe(userGues)
+        return gulf
     } catch (e: Exception){
         println("The flow es $e")
     }
+    return golpe(userGues)
 }
 
-fun golpe(s:String): MutableSet<String> {
+ suspend fun golpe(s:String): MutableSet<String> {
     WordsUsadas.add(s)
     return WordsUsadas
 }
