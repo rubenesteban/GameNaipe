@@ -3,6 +3,7 @@ package app.deserted.OurWord.data
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.cupcake.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
@@ -98,3 +99,5 @@ fun secul(){
         println(hello)
     }
 }
+
+

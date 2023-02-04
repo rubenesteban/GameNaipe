@@ -22,23 +22,18 @@ import kotlinx.coroutines.delay
 fun GameAsk(
     modifier: Modifier = Modifier,
     orderUiState: OrderUiState,
+    elfin:List<String>,
     viewModel: OrderViewModel = viewModel(),
     onNextButtonClicked: () -> Unit = {},
     initialValue: Float = 1f,
     totalTime: Long,
+    MainViewModel: MainViewModel = viewModel()
 
 
     ) {
 
-    val context = LocalContext.current
-    // scope
-    val scope = rememberCoroutineScope()
-    // datastore Email
-    val dataStore = StoreUserEmail(context)
-    // get saved email
-    val savedEmail = dataStore.getEmail.collectAsState(initial = "")
+   // val result by viewModel.readAll.collectAsState(initial = emptyList())
 
-    var email by remember { mutableStateOf("") }
 
     var value by remember {
         mutableStateOf(initialValue)
@@ -95,17 +90,15 @@ fun GameAsk(
             WellnesWrapList(
                 list = viewModel.wrap,
                 onCloseTask = { wrap -> viewModel.remove(wrap,orderUiState.quantity)},
-                onAddTask = { wrap -> viewModel.PalabrasAsk(wrap.key) },
-                onAlfinTask = {  viewModel.dulf(orderUiState.alfin)})
+                onAddTask = { wrap -> viewModel.PalabrasAsk(wrap.key,orderUiState.quantity) },
+                onAlfinTask = {  viewModel.dulf(elfin)})
             WellnesWrapList(
                 list = viewModel.modmar(),
                 onCloseTask = { wrap -> viewModel.remove(wrap,orderUiState.quantity)},
-                onAddTask = {wrap -> viewModel.PalabrasAsk(wrap.key) },
-                onAlfinTask = {  viewModel.dulf(orderUiState.alfin)})
+                onAddTask = {wrap -> viewModel.PalabrasAsk(wrap.key,orderUiState.quantity) },
+                onAlfinTask = {  viewModel.dulf(elfin)})
 
         }
-
-
     }
 }
 

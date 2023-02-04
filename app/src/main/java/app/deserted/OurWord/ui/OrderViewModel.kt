@@ -2,12 +2,20 @@ package app.deserted.OurWord.ui
 
 import android.util.Log
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.deserted.OurWord.data.OrderUiState
+import app.deserted.OurWord.data.PersonRepository
 import app.deserted.OurWord.ui.OrderViewModel.garci.oclose
+
+//import app.deserted.OurWord.ui.OrderViewModel.granito.grano
 import app.deserted.OurWord.ui.OrderViewModel.julian.libre
+import app.deserted.OurWord.ui.OrderViewModel.pegatina.tigre
+import app.deserted.OurWord.ui.OrderViewModel.tina.leon
+//import app.deserted.OurWord.ui.OrderViewModel.migle.maite
 import com.example.cupcake.R
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -18,6 +26,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import javax.inject.Inject
 import kotlin.properties.Delegates
 import kotlin.system.measureTimeMillis
 
@@ -31,8 +40,8 @@ private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
  * [OrderViewModel] holds information about a cupcake order in terms of quantity, flavor, and
  * pickup date. It also knows how to calculate the total price based on these order details.
  */
-class OrderViewModel : ViewModel() {
 
+class OrderViewModel : ViewModel(){
     /**
      * Cupcake state for this order
      */
@@ -44,7 +53,7 @@ class OrderViewModel : ViewModel() {
     val tasks: List<Affirmation>
         get() = _tasks
 
-    //_________________________________________________
+   //-----------------------------
     private var Work: MutableSet<String> = mutableSetOf<String>("")
     private var Oficio: MutableSet<String> = mutableSetOf<String>("")
     private var Trabajo: MutableSet<String> = mutableSetOf<String>("")
@@ -55,6 +64,7 @@ class OrderViewModel : ViewModel() {
     private val Fuess: Any by lazy { sos }
 
     lateinit var pora: String
+    var pico by Delegates.notNull<Int>()
     lateinit var erGuss: String
     lateinit var oro: String
     lateinit var user: String
@@ -63,10 +73,16 @@ class OrderViewModel : ViewModel() {
 
     private var userIndixe: MutableSet<String> = mutableSetOf()
 
+    private var userEnter: MutableSet<String> = mutableSetOf()
+
+
+
     ///------------------------------
 
     private var userdPalabras: MutableSet<String> = mutableSetOf()
 
+
+    private var userdas: MutableSet<String> = mutableSetOf()
     // __________________________________________________
     var userPalabras by mutableStateOf("")
         private set
@@ -83,28 +99,38 @@ class OrderViewModel : ViewModel() {
 
     private var usePalabras: MutableSet<String> = mutableSetOf()
     private var verPalabras: MutableSet<String> = mutableSetOf()
-
+    private var ToldPalabras:List<String> = listOf()
+        private set
     // __________________________________________________
     var userGues by mutableStateOf("")
         private set
     lateinit var pera: List<String>
     lateinit var pura: List<String>
+    lateinit var pina: List<String>
+
     var UserGuess: List<String> = listOf()
     var UserTutu: MutableSet<String> = mutableSetOf<String>("")
     var Usertutus: List<String> = listOf()
     var Usertotos: List<String> = listOf()
-    var UserYuyu: MutableSet<String> = mutableSetOf<String>("")
 
+    var Usertitis: List<String> = listOf()
+    var UserYuyu: MutableSet<String> = mutableSetOf<String>("")
+    var UserMars: MutableSet<String> = mutableSetOf<String>("")
+    var UserLuna: MutableSet<String> = mutableSetOf<String>("")
     var UserJuess: MutableSet<String> = mutableSetOf<String>("")
         private set
     var itil: List<String> = listOf()
     var carro by mutableStateOf("")
         private set
-
+   // var UserLuna = arena
     //_-----------------------------------------------
     private val _wrap = oclose.toMutableStateList()
     val wrap: List<Ask>
         get() = _wrap
+    //---------------------------------------------
+
+
+    ///-------------------------------------------
 
     val parw: List<Ask> = listOf()
 
@@ -134,11 +160,6 @@ class OrderViewModel : ViewModel() {
 
     }
 
-        var uno = _uiState.value.quantity
-
-        var two = click1(uno)
-
-
     /**
      * Set the [desiredFlavor] of cupcakes for this order's state.
      * Only 1 flavor can be selected for the whole order.
@@ -149,10 +170,63 @@ class OrderViewModel : ViewModel() {
 
     }
 
-    var util = "pura"
-    //var cor = chon(pera)
-   // var ron = click(cor)
+   // var util = "hello inca"
+//---------------------------------------------------
+//var UserLuna = moyi()
+    val ULuna: MutableSet<String> = mutableSetOf<String>("")
 
+    var elefante = tigre.toMutableStateList()
+    var camello = leon.toMutableStateList()
+    var uno = elefante.size
+    var cano = click4(uno)
+
+    val tula = camello - elefante
+
+    var bulion = click7(tula)
+
+
+    suspend fun comer(): List<String> {
+        var nigy = camello - elefante
+        return nigy
+    }
+
+
+
+    object pegatina {
+        lateinit var cart: String
+        var UserLima: MutableSet<String> = mutableSetOf<String>("")
+
+        val tigre = moyi()
+        fun moyi(): MutableSet<String> {
+            for (i in 1..49) {
+                cart =  loadAffirmations()[i].key
+                UserLima.add(cart)
+
+            }
+            return UserLima
+
+        }
+
+    }
+
+
+//----------------------------------------------
+object tina {
+    lateinit var cart: String
+    var UserLima: MutableSet<String> = mutableSetOf<String>("")
+
+    val leon = moyi()
+    fun moyi(): MutableSet<String> {
+        for (i in 1..49) {
+            cart =  loadAffirmations()[i].key
+            UserLima.add(cart)
+
+        }
+        return UserLima
+
+    }
+
+}
 
 
     fun hola(){
@@ -160,10 +234,12 @@ class OrderViewModel : ViewModel() {
         oro = "world"
         erGuss = "-:)"
         user = "elo"
+        //cart = "hijo"
         can = 11
         ten = 1
         pura = listOf("a", "b", "c")
         pera = listOf("a", "b", "c", "d")
+        pico = 1
     }
 
 
@@ -172,7 +248,6 @@ class OrderViewModel : ViewModel() {
         val parw = wrap.reversed()
         return parw
     }
-
 
     fun setFlavor(desiredFlavor: String) {
         _uiState.update { currentState ->
@@ -207,7 +282,9 @@ class OrderViewModel : ViewModel() {
                 alfin = UseGuess
             )
         }
-        luuk(UseGuess)
+        val u = _uiState.value.alfin
+        click6(u)
+        return
     }
 
     fun Ditey(UseGuess: List<String>) {
@@ -217,6 +294,10 @@ class OrderViewModel : ViewModel() {
             )
         }
         liik(UseGuess)
+    }
+    fun Deti(u:List<String>): SnapshotStateList<String> {
+        val min = u.toMutableStateList()
+        return min
     }
 
 
@@ -280,9 +361,7 @@ class OrderViewModel : ViewModel() {
             f += 1
             green(f)
         }
-       // checkUserGuess(User)
-        //checkPalabras(User)
-        //Bull(User)
+
     }
 
 
@@ -294,6 +373,8 @@ class OrderViewModel : ViewModel() {
         UserJuess.clear()
         UserTutu.clear()
         UserYuyu.clear()
+        UserMars.clear()
+        UserLuna.clear()
 
     }
 
@@ -303,22 +384,12 @@ class OrderViewModel : ViewModel() {
             _wrap.remove(item)
             r += 1
         }
-       // checkPalabras(User)
-        //checkUserGuess(User)
 
-        //Bull(User)
     }
-
-
-
 
     fun green(s: Int) {
         //  Log.d(TAG, " Este es shin en dook------>>> es: $s!")
     }
-
-
-
-
 
     fun grey(s: Int) {
         Log.d(TAG, " Este es el tamani de palabras----->>> es: $s!")
@@ -328,15 +399,20 @@ class OrderViewModel : ViewModel() {
         Log.d(TAG, " Click este es el valor pura en Affirmation->>> es: $s!")
     }
 
+    fun click6(s: List<String>) {
+        Log.d(TAG, " Llevo la preparacion de Equipos para la salida->>> es: $s!")
+    }
+
     fun click1(s: Int) {
        // checkUserGuess()
-       Log.d(TAG, " Click este es el valor pura en Ask--->>> es: $s!")
+       Log.d(TAG, " Click este es el valor de pura en Ask--->>> es: $s!")
+    }
+
+    fun click7(s: List<String>) {
+        Log.d(TAG, " Este es el valorde click7  a salida->>> es: $s!")
     }
 
 
-    fun click2(s: String) {
-        Log.d(TAG, " Click este es el valor pura en fuera el scope--->>> es: $s!")
-    }
 
 
     fun click3(l: Long) {
@@ -355,18 +431,23 @@ class OrderViewModel : ViewModel() {
     }
 
 
-    fun PalabrasUsa(guessdWord:String, mas:Int): MutableSet<String> {
-        if(w<=mas){
-            userGues = guessdWord
-            pora = guessdWord
-            oro = guessdWord
-            //click1(pora)
-            //click1(oro)
-          var hulk = Pick(userGues)
-          w += 1
+    fun PalabrasUsa(guessdWord:String, mas:Int) {
+        userGues = guessdWord
+        userdWords.add(userGues)
+        if (elefante.contains(userGues)){
+            elefante.remove(userGues)
+            val sin = elefante.size
+            Log.d(TAG, " Los elemantos son igual a-------------------->>> es: $sin!")
+            mitin()
+            pura = camello - elefante
+
+
         }
-        return userdWords
+        Palabras()
+
     }
+
+
 
 
      fun Pick(userGues: String): MutableSet<String> {
@@ -386,7 +467,6 @@ class OrderViewModel : ViewModel() {
             te+=1
         }
 
-            //var helk = Pick(userPalabras)
     }
 
     fun Pickat(userGues: String): MutableSet<String> {
@@ -399,8 +479,7 @@ class OrderViewModel : ViewModel() {
     fun PalabrasUsadas(userGues: String, u:Int): MutableSet<String> {
         pora = userGues
         Palabras.add(pora)
-        //val uno = flow<String> {emit(pora)}
-        //Bill(u)
+        var yup = whather(u)
         checkMito(u)
         return Palabras
     }
@@ -416,6 +495,23 @@ class OrderViewModel : ViewModel() {
     }
 
 
+    fun mitin(): Int {
+        var mar = loadAffirmations()[1].key
+        Log.d(TAG, "Mill -----------en---------------mitin: $mar!")
+        var yup = elefante.size
+        Log.d(TAG, "Mill -----------en---------------mitin: $yup!")
+        return yup
+    }
+
+
+    suspend fun scull(): Int {
+        val pico = mitin()
+        Log.d(TAG, "Hello -----------enter---------------nilo: $pico!")
+        return pico
+    }
+
+
+
 
     fun checkUserGuess(h:Int): List<String> {
         viewModelScope.launch {
@@ -428,10 +524,10 @@ class OrderViewModel : ViewModel() {
                     Usertutus = listade(UserYuyu)
                     Log.d(TAG, "Hello --------------------------nilo: $Usertutus!")
                     Datey(Usertutus)
-                   // pura = Usertutus
+                    EnPalabras = Usertutus.toString()
+                   // pura = User tutus
                     Ditey(Usertutus)
-                    //chon(pera)
-
+                    scull()
                 }
                 Usertutus
             }
@@ -446,12 +542,11 @@ class OrderViewModel : ViewModel() {
         emit(pora)
     }
 
-    fun PalabrasAsk(userGues: String): MutableSet<String> {
+    fun PalabrasAsk(userGues: String, f: Int): MutableSet<String> {
         oro = userGues
-
         userIndixe.add(oro)
-        //val other = flow<String> {emit(oro)  }
-
+        Log.d(TAG, "hola -----------Guess---------------User: $Guess!")
+        checkMito(f)
         return userIndixe
     }
 
@@ -472,6 +567,7 @@ class OrderViewModel : ViewModel() {
                     Log.d(TAG, "hola --------------------------User: $Usertotos!")
                     Datey(Usertotos)
                     Ditey(Usertotos)
+                    scull()
                 }
 
                 Usertotos
@@ -487,23 +583,95 @@ class OrderViewModel : ViewModel() {
     fun Bill(z:Int){
         viewModelScope.launch{
             val tiempo: Long = measureTimeMillis {
-                //val job1 = async { checkPalabras(z) }
+                val job1 = async { checkUserGuess(z) }
+                val job2 = async { checkPalabras(z) }
                 var tren =  checkUserGuess(z)
                 delay(1000)
                 var gull =  checkPalabras(z)
                 Log.d(TAG, "Bull -----------en---------------tren: $pura!")
                 Log.d(TAG, "Bull -----------en---------------gull : $gull!")
-              //  job1.join()
-              //  job2.join()
+                job1.join()
+                job2.join()
                pura = tren
                 var jaque = pura - gull
                 var mate = jaque.size
-                Log.d(TAG, "Bull -----------en---------------jaque: $jaque!")
+                Log.d(TAG, "Bull -----------en---------------jaque: $EnPalabras!")
                 Log.d(TAG, "Bull -----------en---------------mate : $mate!")
             }
             Log.d(TAG, "Bull -----------en---------------Tiempo Total trascurido : $tiempo!")
 
 
+        }
+    }
+
+    var jama = UserMars.add(pora)
+    var elo = listade(UserMars)
+    var mi = click(elo)
+    var tren = elefante.size
+    var nilllo = click1(tren)
+
+
+    fun Palabras(): List<String> {
+        viewModelScope.launch {
+            var elenga = comer()
+            Log.d(TAG, "Bill -----------en otro---------------oro1 : $elenga!")
+            return@launch
+        }
+       return pura
+    }
+
+   suspend fun esmeman(): List<String> {
+        if(elefante.size <= 40){
+            pura = camello - elefante
+        }
+        return pura
+    }
+
+
+    private var util = eco()
+
+
+    fun eco() {
+        viewModelScope.launch {
+            val job = async { esmeman() }
+            var eme = esmeman()
+            var ten = job.join()
+
+        }
+    }
+
+    fun roca() {
+        viewModelScope.launch {
+            val job = async { esmeman() }
+            var eme = esmeman()
+            var ten = job.join()
+
+        }
+    }
+
+
+    fun Bell(z:Int) {
+        viewModelScope.launch {
+            val tiempo: Long = measureTimeMillis {
+
+              //Log.d(TAG, "Bill -----------en---------------pora: $pora!")
+              //  Log.d(TAG, "Bill -----------en---------------oro : $oro!")
+                if (pora != "hello"){
+                    val nube = pora
+                    UserMars.add(nube)
+                    Log.d(TAG, "Bill -----------en---------------oro1 : $UserMars!")
+
+                }
+                if (oro != "world"){
+                    val nube = oro
+                    UserMars.add(nube)
+                    Log.d(TAG, "Bill -----------en---------------oro2 : $UserMars!")
+                }
+                Log.d(TAG, "Bill -----------en---------------oro3 : $UserMars!")
+                    var kon = UserMars.size
+                Log.d(TAG, "Bill -----------en---------------oro3 : $kon!")
+
+            }
         }
     }
 
@@ -532,8 +700,37 @@ class OrderViewModel : ViewModel() {
     var cafe = arbol(three)
 
 
+
+
+    fun Brell(z:Int) {
+        viewModelScope.launch {
+            val tiempo: Long = measureTimeMillis {
+
+                Log.d(TAG, "Bill -----------en---------------pora: $pora!")
+                Log.d(TAG, "Bill -----------en---------------oro : $oro!")
+            }
+        }
+    }
+
+    fun whather(g: Int): MutableSet<String> {
+        var ter = UserMars.add(pora)
+        return UserMars
+    }
+
+
+
     var tree = _uiState.value.torre
     var fe = arbol(tree)
+
+
+
+
+
+    suspend fun mesa(t:Int){
+        var tito = checkPalabras(t)
+
+    }
+
 
 
     fun MiraPalabras(){
@@ -557,9 +754,6 @@ class OrderViewModel : ViewModel() {
                     Datey(Usertutus)
 
                 }
-
-                //Log.d(TAG, "MiraPalabras --------------------------UserYuyu: $UserYuyu!")
-               // Log.d(TAG, "MiraPalabras -----------en---------------yupi: $i!")
 
             }else if ( oro != "world" && ten <= 10){
                 var ten = intercambio.size
@@ -591,8 +785,6 @@ class OrderViewModel : ViewModel() {
 
     fun checkPalabrasUsadas() {
         viewModelScope.launch {
-
-
             var Utus: List<String> = listOf()
             val tiempo:Long = measureTimeMillis {
                // val job1 = async { checkPalabras() }
@@ -725,22 +917,16 @@ class OrderViewModel : ViewModel() {
 
     fun gulf(item: List<String>) {
         val toque = item
-        //checkPalabrasUsadas()
-       // MiraPalabras()
+
         elo(item)
-        // katey(item)
-        // Ditey(item)
-       // checkUserGuess()
+
     }
 
     fun dulf(item: List<String>) {
         val toque = item
-        //checkPalabrasUsadas()
-        //MiraPalabras()
+
         elo(item)
-        // katey(item)
-        // Ditey(item)
-       // checkPalabras()
+
     }
 
 

@@ -29,8 +29,7 @@ import com.example.cupcake.R
 import app.deserted.OurWord.data.DataSource.quantityOptions
 import app.deserted.OurWord.data.OrderUiState
 import app.deserted.OurWord.ui.*
-//import app.deserted.OurWord.listade
-import app.deserted.OurWord.ui.*
+
 
 /**
  * enum values that represent the screens in the app
@@ -115,8 +114,8 @@ fun CupcakeApp(
 
                 GameScreen(
                     orderUiState = uiState,
+                    elfin = uiState.alfin,
                     onNextButtonClicked = {
-
                         navController.navigate(CupcakeScreen.Pickup.name)
                         viewModel.uiState.value.alfin
                         viewModel.uiState.value.torre
@@ -127,6 +126,7 @@ fun CupcakeApp(
                 //val context = LocalContext.current
                 GameAsk(
                     orderUiState = uiState,
+                    elfin = uiState.alfin,
                     onNextButtonClicked = {
                         viewModel.uiState.value.quantity
                     navController.navigate(CupcakeScreen.Summary.name)
