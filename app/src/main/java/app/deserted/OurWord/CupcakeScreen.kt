@@ -30,7 +30,7 @@ import app.deserted.OurWord.data.DataSource.quantityOptions
 import app.deserted.OurWord.data.OrderUiState
 import app.deserted.OurWord.ui.*
 //import app.deserted.OurWord.listade
-import app.deserted.cotopaxi.ui.*
+import app.deserted.OurWord.ui.*
 
 /**
  * enum values that represent the screens in the app
