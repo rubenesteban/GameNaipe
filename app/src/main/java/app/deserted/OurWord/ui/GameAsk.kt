@@ -94,13 +94,13 @@ fun GameAsk(
 
             WellnesWrapList(
                 list = viewModel.wrap,
-                onCloseTask = { wrap -> viewModel.remove(wrap,orderUiState.quantity)},
-                onAddTask = { wrap -> viewModel.PalabrasAsk(wrap.key) },
+                onCloseTask = { wrap -> viewModel.remove1(wrap,orderUiState.quantity)},
+                onAddTask = { wrap -> viewModel.PalabrasAsk(wrap.key,orderUiState.quantity) },
                 onAlfinTask = {  viewModel.gulf(orderUiState.alfin)})
             WellnesWrapList(
                 list = viewModel.modmar(),
-                onCloseTask = { wrap -> viewModel.remove(wrap,orderUiState.quantity)},
-                onAddTask = {wrap -> viewModel.PalabrasAsk(wrap.key) },
+                onCloseTask = { wrap -> viewModel.remove1(wrap,orderUiState.quantity)},
+                onAddTask = { wrap -> viewModel.PalabrasAsk(wrap.key,orderUiState.quantity) },
                 onAlfinTask = {  viewModel.gulf(orderUiState.alfin)})
 
         }

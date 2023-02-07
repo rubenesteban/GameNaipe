@@ -26,7 +26,7 @@ import app.deserted.OurWord.data.OrderUiState
 fun GameScreen(
     orderUiState: OrderUiState,
     modifier: Modifier = Modifier,
-    viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    viewModel: MainViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     onNextButtonClicked:() -> Unit ={},
 
 
@@ -72,7 +72,7 @@ fun GameScreen(
             WellnesTaskList(
                 list = viewModel.tasks,
                 onCloseTask = { tasks -> viewModel.remove(tasks, orderUiState.quantity) },
-                onAlfinTask = { tasks -> viewModel.PalabrasUsadas(tasks.key)},
+                onAlfinTask = { tasks -> viewModel.PalabrasUsadas(tasks.key,orderUiState.quantity)},
                 onAddTask = { viewModel.gulf(orderUiState.alfin) })
         }
     }
