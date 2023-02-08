@@ -23,7 +23,7 @@ fun GameAsk(
     modifier: Modifier = Modifier,
     orderUiState: OrderUiState,
     elfin:List<String>,
-    viewModel: OrderViewModel = viewModel(),
+    viewModel: MainViewModel = viewModel(),
     onNextButtonClicked: () -> Unit = {},
     initialValue: Float = 1f,
     totalTime: Long,

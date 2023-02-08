@@ -26,7 +26,7 @@ fun GameScreen(
     orderUiState: OrderUiState,
     elfin:List<String>,
     modifier: Modifier = Modifier,
-    viewModel: OrderViewModel = viewModel(),
+    viewModel: MainViewModel = viewModel(),
     onNextButtonClicked:() -> Unit ={},
     MainViewModel: MainViewModel = viewModel()
 

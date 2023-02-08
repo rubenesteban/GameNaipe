@@ -72,7 +72,7 @@ fun CupcakeAppBar(
 @Composable
 fun CupcakeApp(
     modifier: Modifier = Modifier,
-    viewModel: OrderViewModel = viewModel(),
+    viewModel: MainViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     // Get current back stack entry
@@ -157,7 +157,7 @@ fun CupcakeApp(
  * Resets the [OrderUiState] and pops up to [CupcakeScreen.Start]
  */
 private fun cancelOrderAndNavigateToStart(
-    viewModel: OrderViewModel,
+    viewModel: MainViewModel,
     navController: NavHostController
 ) {
     viewModel.resetOrder()
